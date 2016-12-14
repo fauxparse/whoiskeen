@@ -41,9 +41,11 @@ gem 'active_model_serializers',
 gem 'auto_strip_attributes'
 gem 'autoprefixer-rails'
 gem 'bourbon', '>= 5.0.0.beta.7'
+gem 'clearance'
 gem 'neat'
 gem 'normalize-rails'
 gem 'stringex'
+gem 'vanilla-ujs'
 
 group :development, :test do
   gem 'awesome_print'
