@@ -71,6 +71,17 @@
         border-bottom: .5rem solid $oc-white;
         transition: left $base-duration $ease-out-back;
       }
+
+      div {
+        position: relative;
+
+        .field {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
     }
 
     &[data-mode="login"] fieldset::before { left: 2.7rem; }
@@ -81,6 +92,18 @@
       display: block;
       margin: 0;
       width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 2.5rem;
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: $small-spacing $base-spacing;
+      }
     }
   }
 

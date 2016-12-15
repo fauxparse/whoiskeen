@@ -48,11 +48,15 @@ class LoginForm extends React.Component {
             <li role="tab" aria-selected={mode === 'password'}
               onClick={() => this.setState({ mode: 'password' })}>Password</li>
           </ul>
-          <VelocityTransitionGroup component="fieldset" disabled={loading}>
-            {this.emailField()}
-            {this.passwordField()}
+          <fieldset disabled={loading}>
+            <VelocityTransitionGroup
+              enter={{ animation: { opacity: 1, height: [79, 'spring'] }, duration: 500, style: { opacity: 0, height: 0 } }}
+              leave={{ animation: { opacity: 0, height: [0, [.5, -0.25, .5, 1]] }, duration: 500 }}>
+              {this.emailField()}
+              {this.passwordField()}
+            </VelocityTransitionGroup>
             {this.submitButton(mode)}
-          </VelocityTransitionGroup>
+          </fieldset>
         </form>
       </div>
     )
@@ -60,19 +64,23 @@ class LoginForm extends React.Component {
 
   emailField() {
     return (
-      <TextField key="email" type="email" name="email" value={this.state.email}
-        label="Email address"
-        onChange={this.handleChange} />
+      <div key="email">
+        <TextField type="email" name="email" value={this.state.email}
+          label="Email address"
+          onChange={this.handleChange} />
+      </div>
     )
   }
 
   passwordField() {
     if (this.state.mode !== 'password') {
       return (
-        <TextField key="password" type="password" name="password"
-          value={this.state.password}
-          label="Password"
-          onChange={this.handleChange} />
+        <div key="password">
+          <TextField type="password" name="password"
+            value={this.state.password}
+            label="Password"
+            onChange={this.handleChange} />
+        </div>
       )
     }
   }
@@ -85,7 +93,9 @@ class LoginForm extends React.Component {
     }[mode]
 
     return (
-      <VelocityTransitionGroup component="button" key="submit" type="submit">
+      <VelocityTransitionGroup component="button" key="submit" type="submit"
+        enter={{ animation: { translateY: 0 }, style: { translateY: '-100%' }, duration: 250 }}
+        leave={{ animation: { translateY: '100%' }, duration: 250 }}>
         <span key={mode}>{buttonText}</span>
       </VelocityTransitionGroup>
     )
