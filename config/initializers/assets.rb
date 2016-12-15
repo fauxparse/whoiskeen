@@ -7,6 +7,9 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('vendor/node_modules')
+Gem::Specification.find_all_by_name('bourbon').each do |gem|
+  Rails.application.config.assets.paths << File.join(gem.gem_dir, 'core')
+end
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
