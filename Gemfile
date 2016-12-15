@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'active_model_serializers',
-    git: 'https://github.com/rails-api/active_model_serializers.git'
+  git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'auto_strip_attributes'
 gem 'autoprefixer-rails'
 gem 'bourbon', '>= 5.0.0.beta.7'

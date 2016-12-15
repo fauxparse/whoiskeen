@@ -3,6 +3,10 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Exclude:
     - 'bin/*'
+    - 'db/schema.rb'
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
 
 Style/Documentation:
   Enabled: false

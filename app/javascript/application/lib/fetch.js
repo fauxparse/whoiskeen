@@ -1,3 +1,5 @@
+require('lodash')
+
 import fetch from 'isomorphic-fetch';
 
 const DEFAULTS = {
@@ -9,11 +11,11 @@ const DEFAULTS = {
 }
 
 function mergeOptions(options, defaults = DEFAULTS) {
-  var headers, token = window.CSRF.token()
-  options = Object.assign({}, defaults, options)
-  headers = Object.assign({}, defaults.headers, options.headers)
-  if (token) headers['X-CSRF-Token'] = token
-  return Object.assign(options, { headers })
+  return _.defaultsDeep(
+    options,
+    DEFAULTS,
+    { headers: { 'X-CSRF-Token': window.CSRF.token() } }
+  )
 }
 
 export default (path, options = {}) => fetch(path, mergeOptions(options))

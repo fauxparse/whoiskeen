@@ -1368,6 +1368,10 @@ lodash.unionwith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.unionwith/-/lodash.unionwith-4.6.0.tgz#74d140b5ca8146e6c643c3724f5152538d9ac1f0"
 
+lodash@^3.10.1:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
+
 lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
@@ -1691,6 +1695,10 @@ react:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+"react-addons-transition-group@^0.14.0 || ^15.0.0":
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-15.4.1.tgz#27d92717089c5e2db202e654a85b76a41b703acc"
 
 react-dom:
   version "15.4.1"
@@ -2079,6 +2087,18 @@ util@^0.10.3, util@0.10.3:
 uuid@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
+
+velocity-animate@^1.3.1:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/velocity-animate/-/velocity-animate-1.4.0.tgz#b220a79cecfcdceeaf66c44e09ee9532bf5fcea5"
+
+velocity-react:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/velocity-react/-/velocity-react-1.1.11.tgz#edb259281c777bd5822a891f66c664c487487a9c"
+  dependencies:
+    lodash "^3.10.1"
+    react-addons-transition-group "^0.14.0 || ^15.0.0"
+    velocity-animate "^1.3.1"
 
 verror@1.3.6:
   version "1.3.6"
