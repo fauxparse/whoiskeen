@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
           <fieldset disabled={loading}>
             <VelocityTransitionGroup component="section"
               enter={{
-                animation: { opacity: 1, height: [79, [.5, 0, .5, 1.25]] },
+                animation: { opacity: 1, height: ['4rem', [.5, 0, .5, 1.25]] },
                 duration: 500,
                 style: { opacity: 0, height: 0 }
               }}
@@ -67,6 +67,7 @@ class LoginForm extends React.Component {
               {this.emailField()}
               {this.passwordField()}
             </VelocityTransitionGroup>
+            {this.resetMessage()}
             {this.submitButton(mode)}
             {this.errors()}
           </fieldset>
@@ -75,14 +76,20 @@ class LoginForm extends React.Component {
     )
   }
 
-  emailField() {
+  resetMessage() {
     const { mode, resetSent } = this.state
 
     if (mode === 'password' && resetSent) {
       return (
         <p>{I18n.t('passwords.create.description')}</p>
       )
-    } else {
+    }
+  }
+
+  emailField() {
+    const { mode, resetSent } = this.state
+
+    if (mode !== 'password' || !resetSent) {
       return (
         <div key="email">
           <TextField type="email" name="email" value={this.state.email}
@@ -117,11 +124,14 @@ class LoginForm extends React.Component {
       return (
         <VelocityTransitionGroup component="button" key="submit" type="submit"
           enter={{
-            animation: { translateY: 0 },
-            style: { translateY: '-100%' },
+            animation: { translateY: 0, opacity: 1 },
+            style: { translateY: '-100%', opacity: 0 },
             duration: 250
           }}
-          leave={{ animation: { translateY: '100%' }, duration: 250 }}>
+          leave={{
+            animation: { translateY: '100%', opacity: 0 },
+            duration: 250
+          }}>
           <span key={mode}>{I18n.t(`helpers.submit.${key}`)}</span>
         </VelocityTransitionGroup>
       )

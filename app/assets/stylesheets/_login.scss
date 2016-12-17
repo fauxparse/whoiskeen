@@ -57,6 +57,10 @@
       padding: 1rem;
       position: relative;
 
+      p:last-child {
+        margin-bottom: 0;
+      }
+
       &::before {
         content: "";
         position: absolute;
@@ -66,6 +70,10 @@
         border-right: .5rem solid transparent;
         border-bottom: .5rem solid $oc-white;
         transition: left $base-duration $ease-out-back;
+      }
+
+      section {
+        margin-bottom: .5rem;
       }
 
       section div {

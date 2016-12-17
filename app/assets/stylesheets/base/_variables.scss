@@ -10,6 +10,8 @@ $bold-font-weight: 600;
 $light-font-weight: 200;
 
 // Font Sizes
+$tiny-font-size: .75em;
+$small-font-size: .875em;
 $base-font-size: 1em;
 $large-font-size: 2em;
 $huge-font-size: 3em;
@@ -31,8 +33,10 @@ $light-grey: $oc-gray-3;
 
 // Font Colors
 $base-font-color: $oc-gray-9;
+$secondary-font-color: $oc-gray-6;
 $action-color: $oc-blue-7;
 $accent-color: $oc-yellow-5;
+$error-color: $oc-red-6;
 
 // Border
 $base-border-color: $light-grey;
