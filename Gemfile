@@ -82,6 +82,7 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'rspec-collection_matchers'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'timecop'

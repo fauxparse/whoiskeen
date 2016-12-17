@@ -1,6 +1,6 @@
 export default class Model {
   constructor(attributes = {}) {
-    this.attributes = attributes;
+    this.setAttributes(attributes)
   }
 
   get key() {
@@ -19,9 +19,5 @@ export default class Model {
     for (var attr in attributes) if (attributes.hasOwnProperty(attr)) {
       this[attr] = attributes[attr];
     }
-  }
-
-  set attributes(attributes = {}) {
-    this.setAttributes(Object.assign({}, attributes));
   }
 }
