@@ -1,3 +1,5 @@
+require('lodash')
+
 import React from 'react'
 import { connect } from 'react-redux'
 import { VelocityTransitionGroup } from 'velocity-react'
@@ -41,21 +43,30 @@ class LoginForm extends React.Component {
       <div className="login-form">
         <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
           <ul key="tabs" role="tabs">
-            <li role="tab" aria-selected={mode === 'login'}
+            <li role="tab" data-mode="login" aria-selected={mode === 'login'}
               onClick={() => this.setState({ mode: 'login' })}>Log in</li>
-            <li role="tab" aria-selected={mode === 'signup'}
+            <li role="tab" data-mode="signup" aria-selected={mode === 'signup'}
               onClick={() => this.setState({ mode: 'signup' })}>Sign up</li>
-            <li role="tab" aria-selected={mode === 'password'}
+            <li role="tab" data-mode="password"
+              aria-selected={mode === 'password'}
               onClick={() => this.setState({ mode: 'password' })}>Password</li>
           </ul>
           <fieldset disabled={loading}>
-            <VelocityTransitionGroup
-              enter={{ animation: { opacity: 1, height: [79, 'spring'] }, duration: 500, style: { opacity: 0, height: 0 } }}
-              leave={{ animation: { opacity: 0, height: [0, [.5, -0.25, .5, 1]] }, duration: 500 }}>
+            <VelocityTransitionGroup component="section"
+              enter={{
+                animation: { opacity: 1, height: [79, 'spring'] },
+                duration: 500,
+                style: { opacity: 0, height: 0 }
+              }}
+              leave={{
+                animation: { opacity: 0, height: [0, [.5, -0.25, .5, 1]] },
+                duration: 500
+              }}>
               {this.emailField()}
               {this.passwordField()}
             </VelocityTransitionGroup>
             {this.submitButton(mode)}
+            {this.errors()}
           </fieldset>
         </form>
       </div>
@@ -94,11 +105,27 @@ class LoginForm extends React.Component {
 
     return (
       <VelocityTransitionGroup component="button" key="submit" type="submit"
-        enter={{ animation: { translateY: 0 }, style: { translateY: '-100%' }, duration: 250 }}
+        enter={{
+          animation: { translateY: 0 },
+          style: { translateY: '-100%' },
+          duration: 250
+        }}
         leave={{ animation: { translateY: '100%' }, duration: 250 }}>
         <span key={mode}>{buttonText}</span>
       </VelocityTransitionGroup>
     )
+  }
+
+  errors() {
+    const errors = _.flatten(_.values(this.state.errors || {}))
+
+    if (errors.length) {
+      return (
+        <div className="errors">
+          {errors.map((msg, i) => <p key={i}>{msg}</p>)}
+        </div>
+      )
+    }
   }
 
   switchMode(mode) {

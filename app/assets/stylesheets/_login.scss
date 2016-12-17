@@ -68,7 +68,7 @@
         transition: left $base-duration $ease-out-back;
       }
 
-      div {
+      section div {
         position: relative;
 
         .field {
@@ -77,6 +77,14 @@
           right: 0;
           bottom: 0;
         }
+      }
+
+      .errors {
+        @include position(absolute, 100% 0% null 0%);
+        margin-top: 1rem;
+        padding: 0 1rem;
+        opacity: .75;
+        color: $oc-white;
       }
     }
 
