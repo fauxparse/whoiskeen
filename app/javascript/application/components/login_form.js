@@ -4,15 +4,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { VelocityTransitionGroup } from 'velocity-react'
 import fetch from '../lib/fetch'
-import { logIn, signUp } from '../actions'
+import { logIn, signUp, resetPassword } from '../actions'
 import TextField from './text_field'
 import User from '../models/user'
-
-const LoginTab = ({ tab, label, mode }) => (
-  <li role="tab" aria-selected={mode === tab}>
-    <span onClick={() => this.switchMode(tab)}>{label}</span>
-  </li>
-)
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -22,17 +16,20 @@ class LoginForm extends React.Component {
       email: '',
       errors: {},
       password: '',
-      loading: false
+      loading: false,
+      resetSent: false
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
+    const { mode } = this.state;
     const { email, errors } = newProps.user || new User;
     this.setState({
       email: (email || '').substr(0),
       errors: errors || {},
-      loading: newProps.user ? false : this.state.loading
+      loading: newProps.user ? false : this.state.loading,
+      resetSent: email && mode === 'password'
     })
   }
 
@@ -43,18 +40,23 @@ class LoginForm extends React.Component {
       <div className="login-form">
         <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
           <ul key="tabs" role="tabs">
-            <li role="tab" data-mode="login" aria-selected={mode === 'login'}
-              onClick={() => this.setState({ mode: 'login' })}>Log in</li>
-            <li role="tab" data-mode="signup" aria-selected={mode === 'signup'}
-              onClick={() => this.setState({ mode: 'signup' })}>Sign up</li>
-            <li role="tab" data-mode="password"
-              aria-selected={mode === 'password'}
-              onClick={() => this.setState({ mode: 'password' })}>Password</li>
+            <li role="tab" rel="login" aria-selected={mode === 'login'}
+              onClick={() => this.switchMode('login')}>
+              {I18n.t('users.new.sign_in')}
+            </li>
+            <li role="tab" rel="signup" aria-selected={mode === 'signup'}
+              onClick={() => this.switchMode('signup')}>
+              {I18n.t('sessions.form.sign_up')}
+            </li>
+            <li role="tab" rel="password" aria-selected={mode === 'password'}
+              onClick={() => this.switchMode('password')}>
+              {I18n.t('sessions.form.forgot_password')}
+            </li>
           </ul>
           <fieldset disabled={loading}>
             <VelocityTransitionGroup component="section"
               enter={{
-                animation: { opacity: 1, height: [79, 'spring'] },
+                animation: { opacity: 1, height: [79, [.5, 0, .5, 1.25]] },
                 duration: 500,
                 style: { opacity: 0, height: 0 }
               }}
@@ -74,13 +76,21 @@ class LoginForm extends React.Component {
   }
 
   emailField() {
-    return (
-      <div key="email">
-        <TextField type="email" name="email" value={this.state.email}
-          label="Email address"
-          onChange={this.handleChange} />
-      </div>
-    )
+    const { mode, resetSent } = this.state
+
+    if (mode === 'password' && resetSent) {
+      return (
+        <p>{I18n.t('passwords.create.description')}</p>
+      )
+    } else {
+      return (
+        <div key="email">
+          <TextField type="email" name="email" value={this.state.email}
+            label={I18n.t('activerecord.attributes.user.email')}
+            onChange={this.handleChange} />
+        </div>
+      )
+    }
   }
 
   passwordField() {
@@ -89,7 +99,7 @@ class LoginForm extends React.Component {
         <div key="password">
           <TextField type="password" name="password"
             value={this.state.password}
-            label="Password"
+            label={I18n.t('activerecord.attributes.user.password')}
             onChange={this.handleChange} />
         </div>
       )
@@ -97,23 +107,25 @@ class LoginForm extends React.Component {
   }
 
   submitButton(mode) {
-    const buttonText = {
-      login: 'Log in',
-      signup: 'Sign up',
-      password: 'Request reset link'
+    const key = {
+      login: 'session.submit',
+      signup: 'user.create',
+      password: 'password.submit'
     }[mode]
 
-    return (
-      <VelocityTransitionGroup component="button" key="submit" type="submit"
-        enter={{
-          animation: { translateY: 0 },
-          style: { translateY: '-100%' },
-          duration: 250
-        }}
-        leave={{ animation: { translateY: '100%' }, duration: 250 }}>
-        <span key={mode}>{buttonText}</span>
-      </VelocityTransitionGroup>
-    )
+    if (mode !== 'password' || !this.state.resetSent) {
+      return (
+        <VelocityTransitionGroup component="button" key="submit" type="submit"
+          enter={{
+            animation: { translateY: 0 },
+            style: { translateY: '-100%' },
+            duration: 250
+          }}
+          leave={{ animation: { translateY: '100%' }, duration: 250 }}>
+          <span key={mode}>{I18n.t(`helpers.submit.${key}`)}</span>
+        </VelocityTransitionGroup>
+      )
+    }
   }
 
   errors() {
@@ -129,7 +141,7 @@ class LoginForm extends React.Component {
   }
 
   switchMode(mode) {
-    this.setState({ mode })
+    this.setState({ mode, resetSent: false })
   }
 
   handleChange(e) {
@@ -139,12 +151,17 @@ class LoginForm extends React.Component {
   submit(e) {
     const { mode, email, password } = this.state
     e.preventDefault();
-    this.setState({ loading: true })
-    if (mode === 'login') {
-      this.props.logIn(email, password)
-    } else if (mode === 'signup') {
-      this.props.signUp(email, password)
-    } else if (mode === 'password') {
+
+    if (email && (password || (mode === 'password'))) {
+      this.setState({ loading: true })
+
+      if (mode === 'login') {
+        this.props.logIn(email, password)
+      } else if (mode === 'signup') {
+        this.props.signUp(email, password)
+      } else if (mode === 'password') {
+        this.props.resetPassword(email)
+      }
     }
   }
 }
@@ -162,7 +179,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logIn: (email, password) => dispatch(logIn(email, password)),
-    signUp: (email, password) => dispatch(signUp(email, password))
+    signUp: (email, password) => dispatch(signUp(email, password)),
+    resetPassword: (email, password) => dispatch(resetPassword(email))
   }
 }
 

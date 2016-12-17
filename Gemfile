@@ -42,6 +42,7 @@ gem 'auto_strip_attributes'
 gem 'autoprefixer-rails'
 gem 'bourbon', '>= 5.0.0.beta.7'
 gem 'clearance'
+gem 'i18n-js', '>= 3.0.0.rc11'
 gem 'neat'
 gem 'normalize-rails'
 gem 'stringex'
@@ -73,6 +74,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener'
 end
 
 group :test do

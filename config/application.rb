@@ -17,5 +17,7 @@ module Whoiskeen
       generate.assets false
       generate.view_specs false
     end
+
+    config.middleware.use I18n::JS::Middleware
   end
 end

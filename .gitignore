@@ -19,3 +19,5 @@
 
 # Ignore files compiled by webpacker.
 public/packs/*
+
+public/javascripts

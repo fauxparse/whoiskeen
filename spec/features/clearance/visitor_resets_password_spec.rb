@@ -11,14 +11,6 @@ RSpec.feature 'Visitor resets password' do
     ActiveJob::Base.queue_adapter = original_adapter
   end
 
-  scenario 'by navigating to the page' do
-    visit sign_in_path
-
-    click_link I18n.t('sessions.form.forgot_password')
-
-    expect(current_path).to eq new_password_path
-  end
-
   scenario 'with valid email' do
     user = user_with_reset_password
 

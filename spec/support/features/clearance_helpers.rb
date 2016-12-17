@@ -1,8 +1,9 @@
 module Features
   module ClearanceHelpers
     def reset_password_for(email)
-      visit new_password_path
-      fill_in 'password_email', with: email
+      visit root_path
+      find(:css, '[rel="password"]').click
+      fill_in 'email', with: email
       click_button I18n.t('helpers.submit.password.submit')
     end
 
@@ -14,7 +15,7 @@ module Features
 
     def sign_in_with(email, password)
       visit root_path
-      find(:css, '[role="tab"][data-mode="login"]').click
+      find(:css, '[rel="login"]').click
       fill_in 'email', with: email
       fill_in 'password', with: password
       click_button 'Log in'
@@ -26,7 +27,7 @@ module Features
 
     def sign_up_with(email, password)
       visit root_path
-      find(:css, '[role="tab"][data-mode="signup"]').click
+      find(:css, '[rel="signup"]').click
       fill_in 'email', with: email
       fill_in 'password', with: password
       click_button I18n.t('helpers.submit.user.create')
