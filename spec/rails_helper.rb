@@ -56,7 +56,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
@@ -70,7 +69,7 @@ RSpec.configure do |config|
     # with the specs, so continue to use transaction strategy for speed.
     shared_db_connection = Capybara.current_driver == :rack_test
 
-    if !shared_db_connection
+    unless shared_db_connection
       # Driver is probably for an external browser with an app
       # under test that does *not* share a database connection with the
       # specs, so use truncation strategy.
