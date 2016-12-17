@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { VelocityTransitionGroup } from 'velocity-react'
 import fetch from '../lib/fetch'
-import { logIn } from '../actions'
+import { logIn, signUp } from '../actions'
 import TextField from './text_field'
 import User from '../models/user'
 
@@ -137,10 +137,15 @@ class LoginForm extends React.Component {
   }
 
   submit(e) {
-    const { email, password } = this.state
+    const { mode, email, password } = this.state
     e.preventDefault();
     this.setState({ loading: true })
-    this.props.logIn(email, password)
+    if (mode === 'login') {
+      this.props.logIn(email, password)
+    } else if (mode === 'signup') {
+      this.props.signUp(email, password)
+    } else if (mode === 'password') {
+    }
   }
 }
 
@@ -156,7 +161,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: (email, password) => dispatch(logIn(email, password))
+    logIn: (email, password) => dispatch(logIn(email, password)),
+    signUp: (email, password) => dispatch(signUp(email, password))
   }
 }
 

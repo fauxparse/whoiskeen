@@ -25,9 +25,10 @@ module Features
     end
 
     def sign_up_with(email, password)
-      visit sign_up_path
-      fill_in 'user_email', with: email
-      fill_in 'user_password', with: password
+      visit root_path
+      find(:css, '[role="tab"][data-mode="signup"]').click
+      fill_in 'email', with: email
+      fill_in 'password', with: password
       click_button I18n.t('helpers.submit.user.create')
     end
 
