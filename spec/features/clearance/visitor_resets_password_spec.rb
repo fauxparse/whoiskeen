@@ -28,7 +28,7 @@ RSpec.feature 'Visitor resets password' do
   private
 
   def expect_reset_notification_to_be_sent_to(user)
-    expect(user.confirmation_token).not_to be_blank
+    expect(user.reload.confirmation_token).not_to be_blank
     expect_mailer_to_have_delivery(
       user.email,
       'password',
