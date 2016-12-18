@@ -42,6 +42,7 @@ gem 'auto_strip_attributes'
 gem 'autoprefixer-rails'
 gem 'bourbon', '>= 5.0.0.beta.7'
 gem 'clearance'
+gem 'i18n-js', '>= 3.0.0.rc11'
 gem 'neat'
 gem 'normalize-rails'
 gem 'stringex'
@@ -64,6 +65,7 @@ group :development, :staging do
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Access an IRB console on exception pages or by using <%= console %>
   # anywhere in the code.
@@ -82,6 +84,7 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'rspec-collection_matchers'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'timecop'

@@ -1,0 +1,75 @@
+.floating-label {
+  position: relative;
+  height: 4em;
+
+  input {
+    height: calc(2em + 1px);
+    padding: .25em 0;
+    line-height: 1.5em;
+    border: none;
+    border-bottom: $base-border;
+    border-radius: 0;
+    margin: 1.5em 0 calc(.5em - 1px);
+    box-shadow: none;
+
+    &:focus, &:hover {
+      box-shadow: none;
+      border-bottom: $base-border;
+    }
+  }
+
+  label {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 1.75em;
+    font-size: 1em;
+    line-height: 1.5;
+    font-weight: $base-font-weight;
+    color: $secondary-font-color;
+    transition: transform $base-duration $base-timing,
+      color $base-duration $base-timing;
+  }
+
+  &.has-value label,
+  &.has-focus label,
+  input:-webkit-autofill ~ label {
+    transform: translateY(-1.5625em) scale(.75);
+    transform-origin: 0% 100%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 3.5em;
+    left: 0;
+    right: 0;
+    border-top: $base-border;
+    transform: scaleX(0);
+    transition: transform $base-duration $base-timing,
+      border-top-color $base-duration $base-timing;
+  }
+
+  &.has-focus::after,
+  &.has-errors::after {
+    transform: scaleX(1);
+  }
+
+  &.has-focus {
+    label { color: $action-color; }
+    &::after { border-top-color: $action-color; }
+  }
+
+  &.has-errors {
+    label { color: $error-color; }
+    &::after { border-top-color: $error-color; }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+  -webkit-transition-delay: 9999s;
+}

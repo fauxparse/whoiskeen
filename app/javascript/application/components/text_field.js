@@ -13,13 +13,13 @@ export default class TextField extends React.Component {
 
     return (
       <div className={this.fieldClass()}>
-        <label htmlFor={name}>{label}</label>
         <input type={type || 'text'} name={name} value={value}
           onFocus={this.handleFocus.bind(this)}
           onBlur={this.handleBlur.bind(this)}
           onChange={this.handleChange.bind(this)}
           {...this.extraProps()}
         />
+        <label htmlFor={name}>{label}</label>
         {this.errors().map((message) => <p className="error">{message}</p>)}
       </div>
     )
@@ -28,6 +28,7 @@ export default class TextField extends React.Component {
   fieldClass() {
     let classNames = _.filter((this.props.className || '').split(/\s+/))
     classNames.push('field')
+    classNames.push('floating-label')
     if (this.state.hasValue) classNames.push('has-value')
     if (this.state.focus) classNames.push('has-focus')
     if (this.errors().length) classNames.push('has-errors')
