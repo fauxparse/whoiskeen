@@ -34,17 +34,12 @@ class SessionsController < Clearance::SessionsController
 
   def login_succeeded
     respond_to do |format|
-      format.html { redirect_back_or url_after_create }
       format.json { render json: @user }
     end
   end
 
   def login_failed(failure_message)
     respond_to do |format|
-      format.html do
-        flash.now.notice = failure_message
-        render template: 'sessions/new', status: :unauthorized
-      end
       format.json { render json: user_with_failure_message(failure_message) }
     end
   end
