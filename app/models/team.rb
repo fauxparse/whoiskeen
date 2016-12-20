@@ -1,4 +1,6 @@
 class Team < ApplicationRecord
+  has_many :members
+
   acts_as_url :name,
     url_attribute: :slug,
     limit: 128
