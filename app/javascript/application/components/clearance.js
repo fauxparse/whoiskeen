@@ -5,6 +5,7 @@ import fetch from '../lib/fetch'
 import User from '../models/user'
 import LoginForm from './login_form'
 import { getLoggedInUser, loggedIn } from '../actions'
+import Animations from '../animations'
 
 class Loading extends React.Component {
   render() {
@@ -45,31 +46,27 @@ class Clearance extends React.Component {
   }
 
   animation() {
-    const { user } = this.props;
+    const { user } = this.props, loggedIn = user && user.id;
+
+    const enter = {
+      animation: Animations.Login.Screen.In,
+      style: { translateY: '-110%' }
+    }
+
+    const leave = {
+      animation: Animations.Login.Screen.Out,
+      style: { translateY: 0 }
+    }
+
     const none = {
       animation: { translateY: 0 },
       style: { translateY: 0 },
       duration: 500
     }
 
-    if (user && user.id) {
-      return {
-        enter: none,
-        leave: {
-          animation: { translateY: ['-110vh', [0.5, -0.25, 0.5, 1]] },
-          style: { translateY: 0 },
-          duration: 500
-        }
-      }
-    } else {
-      return {
-        leave: none,
-        enter: {
-          animation: { translateY: [0, [0.5, 0, 0.5, 1.25]] },
-          style: { translateY: '-110vh' },
-          duration: 500
-        }
-      }
+    return {
+      enter: loggedIn ? none : enter,
+      leave: loggedIn ? leave : none
     }
   }
 }

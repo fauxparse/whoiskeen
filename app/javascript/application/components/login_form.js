@@ -4,39 +4,12 @@ require('velocity-animate/velocity.ui');
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { VelocityTransitionGroup, velocityHelpers } from 'velocity-react'
+import { VelocityTransitionGroup } from 'velocity-react'
 import fetch from '../lib/fetch'
 import { logIn, signUp, resetPassword } from '../actions'
 import TextField from './text_field'
 import User from '../models/user'
-
-const Animations = {
-  In: velocityHelpers.registerEffect({
-    calls: [
-      [{
-        transformPerspective: [800, 800],
-        transformOriginX: ['50%', '50%'],
-        transformOriginY: ['0%', '0%'],
-        marginBottom: 0,
-        opacity: 1,
-        rotateX: [0, -90],
-      }, 1, { easing: 'spring', display: 'block' }]
-    ]
-  }),
-
-  Out: velocityHelpers.registerEffect({
-    calls: [
-      [{
-        transformPerspective: [800, 800],
-        transformOriginX: ['50%', '50%'],
-        transformOriginY: ['0%', '0%'],
-        marginBottom: -64,
-        opacity: 0,
-        rotateX: -90,
-      }, 1, { easing: 'ease-out', display: 'block' }]
-    ]
-  }),
-}
+import Animations from '../animations'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -67,7 +40,7 @@ class LoginForm extends React.Component {
     const { loading, mode } = this.state
 
     const enterAnimation = {
-      animation: Animations.In,
+      animation: Animations.Login.Field.In,
       stagger: 250,
       duration: 500,
       backwards: true,
@@ -76,7 +49,7 @@ class LoginForm extends React.Component {
     }
 
     const leaveAnimation = {
-      animation: Animations.Out,
+      animation: Animations.Login.Field.Out,
       stagger: 250,
       duration: 250,
       backwards: true
@@ -84,33 +57,35 @@ class LoginForm extends React.Component {
 
     return (
       <div className="login-form">
-        <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
-          <ul key="tabs" role="tabs">
-            <li role="tab" rel="login" aria-selected={mode === 'login'}
-              onClick={() => this.switchMode('login')}>
-              {I18n.t('users.new.sign_in')}
-            </li>
-            <li role="tab" rel="signup" aria-selected={mode === 'signup'}
-              onClick={() => this.switchMode('signup')}>
-              {I18n.t('sessions.form.sign_up')}
-            </li>
-            <li role="tab" rel="password" aria-selected={mode === 'password'}
-              onClick={() => this.switchMode('password')}>
-              {I18n.t('sessions.form.forgot_password')}
-            </li>
-          </ul>
-          <fieldset disabled={loading}>
-            <VelocityTransitionGroup component="section"
-              enter={enterAnimation}
-              leave={leaveAnimation}>
-              {this.emailField()}
-              {this.passwordField()}
-            </VelocityTransitionGroup>
-            {this.resetMessage()}
-            {this.submitButton(mode)}
-            {this.errors()}
-          </fieldset>
-        </form>
+        <div className="inner">
+          <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
+            <ul key="tabs" role="tabs">
+              <li role="tab" rel="login" aria-selected={mode === 'login'}
+                onClick={() => this.switchMode('login')}>
+                {I18n.t('users.new.sign_in')}
+              </li>
+              <li role="tab" rel="signup" aria-selected={mode === 'signup'}
+                onClick={() => this.switchMode('signup')}>
+                {I18n.t('sessions.form.sign_up')}
+              </li>
+              <li role="tab" rel="password" aria-selected={mode === 'password'}
+                onClick={() => this.switchMode('password')}>
+                {I18n.t('sessions.form.forgot_password')}
+              </li>
+            </ul>
+            <fieldset disabled={loading}>
+              <VelocityTransitionGroup component="section"
+                enter={enterAnimation}
+                leave={leaveAnimation}>
+                {this.emailField()}
+                {this.passwordField()}
+              </VelocityTransitionGroup>
+              {this.resetMessage()}
+              {this.submitButton(mode)}
+              {this.errors()}
+            </fieldset>
+          </form>
+        </div>
       </div>
     )
   }

@@ -17,10 +17,14 @@
 }
 
 .login-form {
+  @include position(fixed, 0% 0% 0% 0%);
+  z-index: 1000;
+}
+
+.login-form .inner {
   @include clearance-screen;
   top: -10vh;
   padding-top: 10vh;
-  z-index: 1000;
   background: $accent-color;
   color: $oc-white;
 

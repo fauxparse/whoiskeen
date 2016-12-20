@@ -2,8 +2,11 @@ module Features
   module ClearanceHelpers
     def reset_password_for(email)
       visit root_path
+      expect(page)
+        .to have_content I18n.t('sessions.form.forgot_password').upcase
       find(:css, '[rel="password"]').click
       fill_in 'email', with: email
+      expect(page).to have_content I18n.t('helpers.submit.password.submit')
       click_button I18n.t('helpers.submit.password.submit')
     end
 
@@ -18,7 +21,8 @@ module Features
       find(:css, '[rel="login"]').click
       fill_in 'email', with: email
       fill_in 'password', with: password
-      click_button 'Log in'
+      expect(page).to have_content I18n.t('helpers.submit.session.submit')
+      click_button I18n.t('helpers.submit.session.submit')
     end
 
     def sign_out
@@ -28,13 +32,16 @@ module Features
 
     def sign_up_with(email, password)
       visit root_path
+      expect(page).to have_content I18n.t('users.new.title').upcase
       find(:css, '[rel="signup"]').click
       fill_in 'email', with: email
       fill_in 'password', with: password
+      expect(page).to have_content I18n.t('helpers.submit.user.create')
       click_button I18n.t('helpers.submit.user.create')
     end
 
     def expect_user_to_be_signed_in
+      expect(page).not_to have_content I18n.t('layouts.application.sign_in')
       expect(page).to have_content I18n.t('layouts.application.sign_out')
     end
 
