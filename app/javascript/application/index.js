@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import Clearance from './components/clearance'
 import reducer from './reducers'
 import Application from './components/application'
+import Teams from './components/teams'
 
 const store = createStore(reducer, applyMiddleware(thunk))
 const history = syncHistoryWithStore(browserHistory, store)
@@ -17,7 +18,9 @@ document.addEventListener("DOMContentLoaded", e => {
     <Provider store={store}>
       <Clearance>
         <Router history={history}>
-          <Route path="*" component={Application}/>
+          <Route path="/" component={Application}>
+            <Route path="teams" component={Teams}/>
+          </Route>
         </Router>
       </Clearance>
     </Provider>,

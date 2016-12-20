@@ -1,5 +1,8 @@
 class TeamsController < ApplicationController
   def index
-    render inline: 'Hi', layout: true
+    @memberships = current_user.memberships.includes(:team)
+    respond_to do |format|
+      format.json { render json: @memberships, include: [:team] }
+    end
   end
 end

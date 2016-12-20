@@ -6,6 +6,8 @@ export const LOGGED_IN = 'LOGGED_IN'
 export const SIGN_UP = 'SIGN_UP'
 export const RESET_PASSWORD = 'RESET_PASSWORD'
 
+export const SIDEBAR = 'SIDEBAR'
+
 export function getLoggedInUser() {
   return function(dispatch) {
     fetch('/session')
@@ -61,4 +63,12 @@ export function resetPassword(email) {
     })
     .then((response) => dispatch(loggedIn(new User({ email }))))
   }
+}
+
+export function showSidebar(visible = true) {
+  return { type: SIDEBAR, visible }
+}
+
+export function toggleSidebar() {
+  return { type: SIDEBAR }
 }

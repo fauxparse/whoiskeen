@@ -1,25 +1,52 @@
 import React from 'react'
+import { VelocityComponent } from 'velocity-react'
 import { connect } from 'react-redux'
-import { logOut } from '../actions'
+import Sidebar from './sidebar'
+import { toggleSidebar } from '../actions'
 
 class Application extends React.Component {
   render() {
+    const { toggleSidebar, sidebarVisible } = this.props
+
     return (
       <div className="application">
-        Bonjour!
-        <button onClick={() => this.props.logOut()}>Log out</button>
+        <Sidebar/>
+        <VelocityComponent {...this.sidebarAnimation()}>
+          <main data-sidebar={sidebarVisible}>
+            <header>
+              <button rel="menu" onClick={toggleSidebar}>///</button>
+            </header>
+            <div className="shim" onClick={toggleSidebar}/>
+          </main>
+        </VelocityComponent>
       </div>
     )
+  }
+
+  sidebarAnimation() {
+    if (this.props.sidebarVisible) {
+      return {
+        animation: { translateX: ['18rem', 'spring'] },
+        duration: 500
+      }
+    } else {
+      return {
+        animation: { translateX: [0, 'easeOutCubic'] },
+        duration: 250
+      }
+    }
   }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    sidebarVisible: state.sidebar
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOut: () => dispatch(logOut())
+    toggleSidebar: () => dispatch(toggleSidebar())
   }
 }
 

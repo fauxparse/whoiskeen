@@ -1,18 +1,30 @@
-.clearance {
+@mixin clearance-screen {
   @include position(fixed, 0% 0% 0% 0%);
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: $accent-color;
   color: $oc-white;
+  box-shadow: 0 0 1rem rgba(black, .15);
+}
+
+.clearance {
+  @include position(fixed, 0% 0% 0% 0%);
+
+  .loading-screen {
+    @include clearance-screen;
+  }
 }
 
 .login-form {
-  flex: 1;
-  width: 100%;
+  @include clearance-screen;
 
   form {
+    flex: 1;
+    width: 100%;
+
     padding: 1rem;
 
     h1 {
@@ -116,12 +128,14 @@
   }
 
   @include media($medium-screen) {
-    flex: 0;
-    max-width: 20rem;
-    min-height: 50vh;
+    form {
+      flex: 0;
+      max-width: 20rem;
+      min-height: 50vh;
 
-    fieldset {
-      filter: drop-shadow(0 0 .5rem rgba(black, .15));
+      fieldset {
+        filter: drop-shadow(0 0 .5rem rgba(black, .15));
+      }
     }
   }
 }

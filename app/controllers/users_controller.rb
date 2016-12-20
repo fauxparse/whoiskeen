@@ -1,4 +1,6 @@
 class UsersController < Clearance::UsersController
+  skip_before_action :require_login, only: [:create]
+
   def create
     @user = user_from_params
 

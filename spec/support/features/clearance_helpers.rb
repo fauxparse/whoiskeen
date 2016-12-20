@@ -22,6 +22,7 @@ module Features
     end
 
     def sign_out
+      find(:css, '[rel="menu"]').click
       click_button I18n.t('layouts.application.sign_out')
     end
 
