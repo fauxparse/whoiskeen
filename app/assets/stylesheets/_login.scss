@@ -1,12 +1,9 @@
 @mixin clearance-screen {
   @include position(fixed, 0% 0% 0% 0%);
-  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $accent-color;
-  color: $oc-white;
   box-shadow: 0 0 1rem rgba(black, .15);
 }
 
@@ -15,11 +12,17 @@
 
   .loading-screen {
     @include clearance-screen;
+    color: $light-gray;
   }
 }
 
 .login-form {
   @include clearance-screen;
+  top: -10vh;
+  padding-top: 10vh;
+  z-index: 1000;
+  background: $accent-color;
+  color: $oc-white;
 
   form {
     flex: 1;
@@ -86,17 +89,6 @@
 
       section {
         margin-bottom: .5rem;
-      }
-
-      section div {
-        position: relative;
-
-        .field {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-        }
       }
 
       .errors {

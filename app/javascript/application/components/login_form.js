@@ -1,12 +1,42 @@
 require('lodash')
+require('velocity-animate');
+require('velocity-animate/velocity.ui');
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { VelocityTransitionGroup } from 'velocity-react'
+import { VelocityTransitionGroup, velocityHelpers } from 'velocity-react'
 import fetch from '../lib/fetch'
 import { logIn, signUp, resetPassword } from '../actions'
 import TextField from './text_field'
 import User from '../models/user'
+
+const Animations = {
+  In: velocityHelpers.registerEffect({
+    calls: [
+      [{
+        transformPerspective: [800, 800],
+        transformOriginX: ['50%', '50%'],
+        transformOriginY: ['0%', '0%'],
+        marginBottom: 0,
+        opacity: 1,
+        rotateX: [0, -90],
+      }, 1, { easing: 'spring', display: 'block' }]
+    ]
+  }),
+
+  Out: velocityHelpers.registerEffect({
+    calls: [
+      [{
+        transformPerspective: [800, 800],
+        transformOriginX: ['50%', '50%'],
+        transformOriginY: ['0%', '0%'],
+        marginBottom: -64,
+        opacity: 0,
+        rotateX: -90,
+      }, 1, { easing: 'ease-out', display: 'block' }]
+    ]
+  }),
+}
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -36,6 +66,22 @@ class LoginForm extends React.Component {
   render() {
     const { loading, mode } = this.state
 
+    const enterAnimation = {
+      animation: Animations.In,
+      stagger: 250,
+      duration: 500,
+      backwards: true,
+      display: 'block',
+      style: { display: 'none' }
+    }
+
+    const leaveAnimation = {
+      animation: Animations.Out,
+      stagger: 250,
+      duration: 250,
+      backwards: true
+    }
+
     return (
       <div className="login-form">
         <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
@@ -55,15 +101,8 @@ class LoginForm extends React.Component {
           </ul>
           <fieldset disabled={loading}>
             <VelocityTransitionGroup component="section"
-              enter={{
-                animation: { opacity: 1, height: ['4rem', [.5, 0, .5, 1.25]] },
-                duration: 500,
-                style: { opacity: 0, height: 0 }
-              }}
-              leave={{
-                animation: { opacity: 0, height: [0, [.5, -0.25, .5, 1]] },
-                duration: 500
-              }}>
+              enter={enterAnimation}
+              leave={leaveAnimation}>
               {this.emailField()}
               {this.passwordField()}
             </VelocityTransitionGroup>
@@ -91,11 +130,10 @@ class LoginForm extends React.Component {
 
     if (mode !== 'password' || !resetSent) {
       return (
-        <div key="email">
-          <TextField type="email" name="email" value={this.state.email}
-            label={I18n.t('activerecord.attributes.user.email')}
-            onChange={this.handleChange} />
-        </div>
+        <TextField key="email" type="email" name="email"
+          value={this.state.email}
+          label={I18n.t('activerecord.attributes.user.email')}
+          onChange={this.handleChange} />
       )
     }
   }
@@ -103,12 +141,10 @@ class LoginForm extends React.Component {
   passwordField() {
     if (this.state.mode !== 'password') {
       return (
-        <div key="password">
-          <TextField type="password" name="password"
-            value={this.state.password}
-            label={I18n.t('activerecord.attributes.user.password')}
-            onChange={this.handleChange} />
-        </div>
+        <TextField key="password" type="password" name="password"
+          value={this.state.password}
+          label={I18n.t('activerecord.attributes.user.password')}
+          onChange={this.handleChange} />
       )
     }
   }

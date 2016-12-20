@@ -23,12 +23,12 @@ class Clearance extends React.Component {
 
   render() {
     return (
-      <VelocityTransitionGroup component="div" className="clearance"
-        enter={{ animation: { opacity: 1 }, duration: 500 }}
-        leave={{ animation: { opacity: 0 }, duration: 500 }}
-      >
-        {this.contents()}
-      </VelocityTransitionGroup>
+      <div className="clearance">
+        <Loading/>
+        <VelocityTransitionGroup {...this.animation()}>
+          {this.contents()}
+        </VelocityTransitionGroup>
+      </div>
     )
   }
 
@@ -37,39 +37,38 @@ class Clearance extends React.Component {
 
     if (user) {
       if (user.id) {
-        return this.props.children
+        return React.cloneElement(this.props.children, { key: 'logged-in' })
       } else {
-        return <LoginForm user={user} />
+        return <LoginForm user={user} key="login" />
       }
-    } else {
-      return <Loading />
     }
   }
 
   animation() {
-    return {
-      enter: { animation: { opacity: 1 }, duration: 1000 },
-      leave: { animation: { opacity: 0 }, duration: 1000 },
-    }
-
     const { user } = this.props;
+    const none = {
+      animation: { translateY: 0 },
+      style: { translateY: 0 },
+      duration: 500
+    }
 
     if (user && user.id) {
       return {
-        enter: { animation: {}, duration: 5000 },
+        enter: none,
         leave: {
-          animation: { translateY: ['-110%', 'easeInCubic'] },
-          duration: 5000
+          animation: { translateY: ['-110vh', [0.5, -0.25, 0.5, 1]] },
+          style: { translateY: 0 },
+          duration: 500
         }
       }
     } else {
       return {
+        leave: none,
         enter: {
-          animation: { translateY: [0, 'easeOutCubic'] },
-          style: { translateY: '-110%' },
-          duration: 5000
-        },
-        leave: { animation: {}, duration: 5000 }
+          animation: { translateY: [0, [0.5, 0, 0.5, 1.25]] },
+          style: { translateY: '-110vh' },
+          duration: 500
+        }
       }
     }
   }
