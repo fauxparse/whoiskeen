@@ -1,20 +1,19 @@
 import React from 'react'
 import { VelocityComponent } from 'velocity-react'
 import { connect } from 'react-redux'
-import SectionHeader from './section_header'
 import Sidebar from './sidebar'
 import { toggleSidebar } from '../actions'
 
 class Application extends React.Component {
   render() {
-    const { toggleSidebar, sidebarVisible } = this.props
+    const { toggleSidebar, sidebarVisible, children } = this.props
 
     return (
       <div className="application">
         <Sidebar/>
         <VelocityComponent {...this.sidebarAnimation()}>
           <main data-sidebar={sidebarVisible}>
-            <SectionHeader/>
+            {children}
             <div className="shim" onClick={toggleSidebar}/>
           </main>
         </VelocityComponent>

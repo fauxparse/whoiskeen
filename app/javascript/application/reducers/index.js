@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import user from './user'
 import sidebar from './sidebar'
+import teams from './teams'
+import user from './user'
 
 const reducer = combineReducers({
-  user,
   sidebar,
+  teams,
+  user,
   routing: routerReducer
 })
 

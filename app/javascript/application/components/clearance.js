@@ -4,6 +4,7 @@ import { VelocityTransitionGroup } from 'velocity-react'
 import fetch from '../lib/fetch'
 import User from '../models/user'
 import LoginForm from './login_form'
+import Application from './application'
 import { getLoggedInUser, loggedIn } from '../actions'
 import Animations from '../animations'
 
@@ -38,7 +39,11 @@ class Clearance extends React.Component {
 
     if (user) {
       if (user.id) {
-        return React.cloneElement(this.props.children, { key: 'logged-in' })
+        return (
+          <Application key="logged-in">
+            {this.props.children}
+          </Application>
+        )
       } else {
         return <LoginForm user={user} key="login" />
       }

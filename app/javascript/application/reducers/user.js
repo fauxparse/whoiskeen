@@ -1,5 +1,4 @@
 import { LOGGED_IN } from '../actions'
-import User from '../models/user'
 
 export default function user(state = false, action) {
   switch (action.type) {

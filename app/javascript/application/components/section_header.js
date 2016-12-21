@@ -6,7 +6,7 @@ import PageSlider from './page_slider';
 class SectionHeader extends Component {
   render() {
     const { children, direction } = this.props;
-    const title = this.props.title || "title";
+    const title = this.props.title || '';
 
     return (
       <header className="section-header">

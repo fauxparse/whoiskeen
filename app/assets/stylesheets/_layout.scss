@@ -68,3 +68,13 @@
     }
   }
 }
+
+.page-slider {
+  flex: 1;
+  position: relative;
+
+  > section {
+    @include position(absolute, 0% null 0% 0%);
+    width: 100%;
+  }
+}

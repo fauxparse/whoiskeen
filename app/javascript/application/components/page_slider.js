@@ -1,13 +1,18 @@
+require('lodash')
+
 import React, { Component } from 'react'
 import { VelocityTransitionGroup } from 'velocity-react'
 import Animations from '../animations'
 
 class PageSlider extends Component {
   render() {
-    const { component, className, children } = this.props;
+    const { component, children } = this.props;
+
+    var className = _.filter([this.props.className, 'page-slider']).join(' ')
+
     return (
       <VelocityTransitionGroup component={component || "section"}
-        className={className || 'page-slider'} {...this.pageAnimation()}>
+        className={className} {...this.pageAnimation()}>
         {children}
       </VelocityTransitionGroup>
     )
