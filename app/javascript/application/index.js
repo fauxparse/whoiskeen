@@ -7,6 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import Clearance from './components/clearance'
 import reducer from './reducers'
+import Dashboard from './components/dashboard'
 import Teams from './components/teams'
 import TeamList from './components/team_list'
 import TeamContainer from './components/team_container'
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", e => {
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={Clearance}>
+          <IndexRoute component={Dashboard}/>
           <Route path="teams" component={Teams}>
             <IndexRoute component={TeamList}/>
             <Route path=":team_id" component={TeamContainer}/>

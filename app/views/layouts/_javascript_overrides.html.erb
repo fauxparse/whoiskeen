@@ -1,0 +1,12 @@
+<% if Rails.env.test? %>
+  <style type="text/css">
+    * {
+      transition-property: none !important;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.Velocity) Velocity.mock = true;
+    })
+  </script>
+<% end %>

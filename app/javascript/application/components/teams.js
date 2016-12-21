@@ -10,14 +10,11 @@ class Teams extends React.Component {
     this.state = { direction: PageSlider.LEFT }
   }
 
-  componentWillMount() {
-    fetchTeams()
-  }
-
   componentWillReceiveProps(newProps) {
     const { pathname } = newProps.location;
 
     if (pathname !== this.state.pathname) {
+      newProps.fetch && newProps.fetch()
       this.setState({
         pathname,
         direction: pathname < (this.state.pathname || '') ?
@@ -27,35 +24,34 @@ class Teams extends React.Component {
   }
 
   render() {
-    const { children, location } = this.props
+    const { children, location, team } = this.props
     const { direction } = this.state
 
     return (
       <section className="teams">
         <SectionHeader title={this.title()} direction={direction}/>
         <PageSlider direction={direction}>
-          {React.cloneElement(children, { key: location.pathname })}
+          {React.cloneElement(children, {
+            key: location.pathname,
+            setTitle: (title) => this.setState({ title }),
+            team
+          })}
         </PageSlider>
       </section>
     )
   }
 
   title() {
-    const team = this.team() || {}
+    const { team } = this.props
 
-    return team.name || 'Teams'
-  }
-
-  team() {
-    const { teams, params } = this.props
-
-    return teams[params.team_id]
+    return team && team.name || 'Teams'
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const { teams } = state
   return {
-    teams: state.teams || {}
+    team: teams.indexed[ownProps.params.team_id]
   }
 }
 

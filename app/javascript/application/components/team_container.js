@@ -1,31 +1,34 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchTeams } from '../actions'
+import { fetchTeam, fetchTeams } from '../actions'
 
 class TeamContainer extends React.Component {
-  componentWillMount() {
-    fetchTeams()
+  componentWillReceiveProps(newProps) {
+    if (!newProps.team.members && newProps.refresh && !newProps.loading) {
+      newProps.refresh(newProps.team.slug)
+    }
   }
 
   render() {
-    const { teams } = this.props
+    const { team } = this.props
 
     return (
       <section className="team">
-        Teeeeeam
+        {team && team.name}
       </section>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    teams: state.teams
+    loading: state.teams.loading
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    refresh: (id) => dispatch(fetchTeam(id))
   }
 }
 

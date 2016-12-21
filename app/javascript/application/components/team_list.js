@@ -11,6 +11,10 @@ const Row = ({ team }) => (
 )
 
 class TeamList extends React.Component {
+  componentDidMount() {
+    this.props.setTitle('Teams')
+  }
+
   render() {
     const { teams } = this.props
 
@@ -24,7 +28,7 @@ class TeamList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    teams: _.sortBy(_.values(state.teams), (team) => team.name)
+    teams: state.teams.entities
   }
 }
 
