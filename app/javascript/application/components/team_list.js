@@ -5,9 +5,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 const Row = ({ team }) => (
-  <li>
-    <Link to={team.url()}>{team.name}</Link>
-  </li>
+  <li><Link to={team.url()}><span>{team.name}</span></Link></li>
 )
 
 class TeamList extends React.Component {
@@ -20,7 +18,9 @@ class TeamList extends React.Component {
 
     return (
       <section className="team-list">
-        {teams.map((team) => <Row key={team.id} team={team}/>)}
+        <ul>
+          {teams.map((team) => <Row key={team.id} team={team}/>)}
+        </ul>
       </section>
     )
   }
