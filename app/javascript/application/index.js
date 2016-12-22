@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import Clearance from './components/clearance'
 import reducer from './reducers'
@@ -12,7 +12,11 @@ import Teams from './components/teams'
 import TeamList from './components/team_list'
 import TeamContainer from './components/team_container'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk),
+  applyMiddleware(routerMiddleware(browserHistory))
+)
 const history = syncHistoryWithStore(browserHistory, store)
 
 document.addEventListener("DOMContentLoaded", e => {
