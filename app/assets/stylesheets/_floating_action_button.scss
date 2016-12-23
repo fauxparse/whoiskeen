@@ -1,0 +1,49 @@
+.floating-action-button {
+  @include position(absolute, null null 2.75em 50%);
+
+  .circle,
+  > button {
+    @include position(absolute, 0 null null 0);
+  }
+
+  .circle {
+    @include size(4em);
+    margin: -2em;
+    transform: scale(0);
+
+    circle {
+      fill: $accent-color;
+    }
+  }
+
+  &:not(.open) .circle {
+    filter: drop-shadow(0 1px .5em rgba(black, .15));
+  }
+
+  > button {
+    @include size(3.5em);
+    margin: -1.75em;
+    background: none;
+    border-radius: 50%;
+    padding: 1em;
+    outline: none;
+    color: white;
+
+    svg {
+      display: block;
+    }
+  }
+
+  > button[rel="add"] {
+    .icon {
+      transition: transform 500ms $ease-out-back;
+      transform: rotate(0deg);
+    }
+  }
+
+  &.open > button[rel="add"] {
+    .icon {
+      transform: rotate(405deg);
+    }
+  }
+}

@@ -13,7 +13,8 @@ $light-font-weight: 200;
 $tiny-font-size: .75em;
 $small-font-size: .875em;
 $base-font-size: 1em;
-$large-font-size: 2em;
+$large-font-size: 1.25em;
+$big-font-size: 2em;
 $huge-font-size: 3em;
 
 // Line height
@@ -21,7 +22,8 @@ $base-line-height: 1.5;
 $heading-line-height: 1.2;
 
 // Other Sizes
-$base-border-radius: 3px;
+$base-border-radius: .25rem;
+$large-border-radius: .5rem;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;

@@ -1,6 +1,15 @@
 en:
+  dialog:
+    save: Save
+    cancel: Cancel
+  teams:
+    new:
+      title: Start a new team
+      submit: Create team
   activerecord:
     attributes:
       user:
         email: Email address
         password: Password
+      team:
+        name: Team name

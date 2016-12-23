@@ -10,7 +10,7 @@ export const REFRESH_TEAM = 'REFRESH_TEAM'
 
 export function fetchTeam(team_id) {
   return function(dispatch) {
-    fetch(`/teams/${team_id}`)
+    fetch(`/teams/${team_id}.json`)
       .then((response) => response.json())
       .then((json) => {
         const data = normalize(json, TeamSchema)
@@ -20,7 +20,7 @@ export function fetchTeam(team_id) {
 }
 
 export const fetchTeams = () => function(dispatch) {
-  fetch('/teams')
+  fetch('/teams.json')
     .then((response) => response.json())
     .then((json) => {
       const data = normalize(json, arrayOf(MembershipSchema))
@@ -34,9 +34,10 @@ export const fetchTeams = () => function(dispatch) {
     })
 }
 
-export const refreshTeams = (teams) => ({
+export const refreshTeams = (teams, clear = true) => ({
   type: REFRESH_TEAMS,
-  teams: teams.map((attrs) => new Team(attrs))
+  teams: teams.map((attrs) => new Team(attrs)),
+  clear
 })
 
 export const refreshTeam = (team) => ({

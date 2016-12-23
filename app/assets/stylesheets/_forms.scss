@@ -67,6 +67,13 @@
   }
 }
 
+form {
+  button[type="submit"] {
+    display: block;
+    margin-top: .5rem;
+  }
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

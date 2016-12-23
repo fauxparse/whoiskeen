@@ -9,6 +9,7 @@ import Clearance from './components/clearance'
 import reducer from './reducers'
 import Dashboard from './components/dashboard'
 import Teams from './components/teams'
+import NewTeam from './components/new_team'
 import TeamList from './components/team_list'
 import TeamContainer from './components/team_container'
 

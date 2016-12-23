@@ -15,6 +15,9 @@ class TeamsController < ApplicationController
     end
   end
 
+  def new
+  end
+
   private
 
   def team_id
