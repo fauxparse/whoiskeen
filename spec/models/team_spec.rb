@@ -29,7 +29,10 @@ RSpec.describe Team, type: :model do
       let(:team) { create(:team, name: 'Boring') }
 
       it 'is still unique' do
-        expect(param).to eq 'boring-1'
+        expect(Kernel)
+          .to receive(:rand).with(anything)
+          .and_return(12345)
+        expect(param).to eq 'boring-12345'
       end
     end
   end
