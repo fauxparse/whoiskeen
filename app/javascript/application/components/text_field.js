@@ -50,17 +50,17 @@ export default class TextField extends React.Component {
 
   handleChange(e) {
     this.setState({ hasValue: !this.emptyValue(e.target.value) })
-    this.props.onChange && this.props.onChange(e)
+    if (this.props.onChange) this.props.onChange(e)
   }
 
   handleFocus(e) {
     this.setState({ focus: true })
-    this.props.onFocus && this.props.onFocus(e)
+    if (this.props.onFocus) this.props.onFocus(e)
   }
 
   handleBlur(e) {
     this.setState({ focus: false })
-    this.props.onBlur && this.props.onBlur(e)
+    if (this.props.onBlur) this.props.onBlur(e)
   }
 
   emptyValue(value) {

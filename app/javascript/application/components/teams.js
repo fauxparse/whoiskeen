@@ -14,7 +14,7 @@ class Teams extends React.Component {
     const { pathname } = newProps.location;
 
     if (pathname !== this.state.pathname) {
-      newProps.fetch && newProps.fetch()
+      if (newProps.fetch) newProps.fetch()
       this.setState({
         pathname,
         direction: pathname < (this.state.pathname || '') ?

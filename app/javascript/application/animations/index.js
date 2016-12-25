@@ -37,7 +37,7 @@ export default {
         calls: [
           [ { translateY: ['-110%', [0.5, -0.25, 0.5, 1]] } ]
         ]
-      }, 'Out'),
+      }, 'Out')
     },
     Field: {
       In: velocityHelpers.registerEffect({
@@ -48,7 +48,7 @@ export default {
             transformOriginY: ['0%', '0%'],
             marginBottom: 0,
             opacity: 1,
-            rotateX: [0, -90],
+            rotateX: [0, -90]
           }, 1, { easing: 'spring', display: 'block' }]
         ]
       }),
@@ -60,7 +60,7 @@ export default {
             transformOriginY: ['0%', '0%'],
             marginBottom: -64,
             opacity: 0,
-            rotateX: -90,
+            rotateX: -90
           }, 1, { easing: 'ease-out', display: 'block' }]
         ]
       })
