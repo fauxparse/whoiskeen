@@ -2,6 +2,7 @@ import { normalize, arrayOf } from 'normalizr'
 import { TeamSchema, MembershipSchema } from '../schemas'
 import fetch from '../lib/fetch'
 import Team from '../models/team'
+import Member from '../models/member'
 
 export const FETCH_TEAMS = 'FETCH_TEAMS'
 export const FETCH_TEAM = 'FETCH_TEAM'
@@ -14,7 +15,13 @@ export function fetchTeam(team_id) {
       .then((response) => response.json())
       .then((json) => {
         const data = normalize(json, TeamSchema)
-        dispatch(refreshTeam(data.entities.teams[data.result]))
+        const members = _.values(data.entities.members)
+        const team = _.assign(
+          {},
+          data.entities.teams[data.result],
+          { members }
+        )
+        dispatch(refreshTeam(team))
       })
   }
 }
@@ -27,10 +34,10 @@ export const fetchTeams = () => function(dispatch) {
       const teams = _.values(data.entities.memberships)
         .map(member => _.assign(
           {},
-          data.entities.teams[member.team_id],
+          _.omit(data.entities.teams[member.team], ['members']),
           { member }
         ))
-      dispatch(refreshTeams(_.values(data.entities.teams)))
+      dispatch(refreshTeams(teams))
     })
 }
 

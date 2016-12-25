@@ -11,7 +11,12 @@ class NewTeam extends React.Component {
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this)
-    this.state = { name: '', displayName: '', saving: false, errors: {} }
+    this.state = {
+      name: '',
+      displayName: props.defaultDisplayName,
+      saving: false,
+      errors: {}
+    }
   }
 
   render() {
@@ -94,7 +99,11 @@ class NewTeam extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { }
+  const members = state.teams.entities.map((team) => team.member)
+  const latest = _.last(_.sortBy(members, 'updatedAt'))
+  return {
+    defaultDisplayName: latest ? latest.name : ''
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
