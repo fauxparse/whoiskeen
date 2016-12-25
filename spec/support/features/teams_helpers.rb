@@ -7,7 +7,8 @@ module Features
       within(:css, '.new-team') do
         expect(page).to have_content t('activerecord.attributes.team.name')
         fill_in t('activerecord.attributes.team.name'), with: name
-        fill_in t('activerecord.attributes.team.display_name'), with: display_name
+        fill_in t('activerecord.attributes.team.display_name'),
+          with: display_name
         first(:css, '[type="submit"]').trigger('click')
       end
     end
