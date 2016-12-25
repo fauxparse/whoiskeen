@@ -13,6 +13,7 @@ module Features
       password = 'password'
       user = FactoryGirl.create(:user, password: password)
       sign_in_with user.email, password
+      expect(page).not_to have_selector('.login-form')
     end
 
     def sign_in_with(email, password)

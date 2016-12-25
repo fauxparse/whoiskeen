@@ -1,43 +1,81 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import fetch from '../lib/fetch'
 import TextField from './text_field'
 import Team from '../models/team'
 import { Buttons } from '../icons'
+import { refreshTeam } from '../actions'
 
 class NewTeam extends React.Component {
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this)
-    this.state = { name: '' }
+    this.state = { name: '', saving: false, errors: {} }
   }
 
   render() {
-    const { name } = this.state
+    const { name, saving, errors } = this.state
     const { close } = this.props
 
     return (
       <form className="new-team" onSubmit={this.submit}>
         <header>
-          <button onClick={close}>{Buttons.CLOSE}</button>
+          <button type="button" onClick={close} disabled={saving}>
+            {Buttons.CLOSE}
+          </button>
           <h2>{I18n.t('teams.new.title')}</h2>
-          <button type="submit">{I18n.t('dialog.save')}</button>
+          <button type="submit" disabled={saving || !name} tabIndex={1}>
+            {I18n.t(saving ? 'dialog.saving' : 'dialog.save')}
+          </button>
         </header>
-        <fieldset>
+        <fieldset disabled={saving}>
           <TextField label={I18n.t('activerecord.attributes.team.name')}
             name="name" value={name} autoFocus={true}
+            errors={errors.name || []}
             onChange={this.changeName.bind(this)}
           />
         </fieldset>
         <footer>
-          <button rel="cancel" onClick={close}>{I18n.t('dialog.cancel')}</button>
-          <button type="submit">{I18n.t('teams.new.submit')}</button>
+          <button type="button" rel="cancel" onClick={close} disabled={saving}>
+            {I18n.t('dialog.cancel')}
+          </button>
+          <button type="submit" disabled={saving || !name} tabIndex={1}>
+            {I18n.t(saving ? 'dialog.saving' : 'teams.new.submit')}
+          </button>
         </footer>
       </form>
     )
   }
 
   submit(e) {
+    const { name } = this.state
     e.preventDefault()
+    e.stopPropagation()
+
+    if (name) {
+      this.setState({ saving: true })
+      fetch('/teams.json', {
+        method: 'post',
+        body: JSON.stringify({
+          team: { name }
+        })
+      })
+        .then((response) => response.json())
+        .then((json) => this.created(new Team(json)))
+    }
+  }
+
+  created(team) {
+    const { name, errors } = team
+
+    this.setState({ saving: false, name, errors })
+
+    if (_.isEmpty(errors)) {
+      this.props.addTeam(team)
+      this.props.close()
+      setTimeout(() => this.props.goToTeamPage(team), 500)
+    }
   }
 
   changeName(e) {
@@ -50,7 +88,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { }
+  return {
+    addTeam: (team) => dispatch(refreshTeam(team)),
+    goToTeamPage: (team) => dispatch(push(team.url()))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTeam)

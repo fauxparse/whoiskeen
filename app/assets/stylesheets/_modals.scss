@@ -43,6 +43,15 @@
         color: currentColor;
       }
 
+      button:focus,
+      button:hover,
+      button:active,
+      button:disabled,
+      button:disabled:hover {
+        background: none;
+        color: currentColor;
+      }
+
       h2 {
         @include ellipsis;
         flex: 1;
@@ -84,17 +93,21 @@
         background: none;
         color: $base-font-color;
         border-bottom: $base-border;
-        padding: .5rem;
+        padding: 1.5rem .5rem;
+
+        button {
+          display: none;
+        }
       }
 
       fieldset {
-        padding: 1.5rem;
+        padding: 0 1.5rem 1.5rem;
       }
 
       footer {
         border-top: $base-border;
         display: flex;
-        padding: calc(1rem - 1px) .5rem .5rem;
+        padding: calc(1rem - 1px) 1rem .5rem;
         justify-content: flex-end;
         flex-wrap: wrap;
 
@@ -103,9 +116,18 @@
           padding: .5rem;
           line-height: 1.25rem;
           font-size: $small-font-size;
-          background: none;
           text-transform: uppercase;
           color: $action-color;
+          background: none;
+        }
+
+        button:focus,
+        button:hover,
+        button:active,
+        button:disabled,
+        button:disabled:hover {
+          background: none;
+          color: currentColor;
         }
 
         [rel="cancel"] {

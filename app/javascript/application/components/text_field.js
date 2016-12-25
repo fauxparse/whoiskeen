@@ -20,7 +20,7 @@ export default class TextField extends React.Component {
           {...this.extraProps()}
         />
         <label htmlFor={id || name}>{label}</label>
-        {this.errors().map((message) => <p className="error">{message}</p>)}
+        {this.errors()}
       </div>
     )
   }
@@ -36,7 +36,9 @@ export default class TextField extends React.Component {
   }
 
   errors() {
-    return this.props.errors || []
+    return (this.props.errors || []).map((message, i) => (
+      <p key={i} className="error">{message}</p>
+    ))
   }
 
   extraProps() {

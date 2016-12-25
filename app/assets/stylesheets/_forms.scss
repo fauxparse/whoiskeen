@@ -1,6 +1,6 @@
 .floating-label {
   position: relative;
-  height: 4em;
+  min-height: 4em;
   padding: 1.5em 0 calc(.5em - 1px);
 
   input {
@@ -64,6 +64,12 @@
   &.has-errors {
     label { color: $error-color; }
     &::after { border-top-color: $error-color; }
+  }
+
+  .error {
+    margin: .5rem 0 0;
+    font-size: $tiny-font-size;
+    color: $error-color;
   }
 }
 

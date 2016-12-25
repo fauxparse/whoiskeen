@@ -12,14 +12,9 @@ export default class FloatingActionButton extends React.Component {
 
     return (
       <div className={this.className()}>
-        <VelocityComponent
-          animation={{ scale: [open ? 200 : 1, 'ease-in-out'] }}
-          duration={750}
-          runOnMount={true}>
-          <svg className="circle" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" onClick={() => this.toggle()}/>
-          </svg>
-        </VelocityComponent>
+        <svg className="circle" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" onClick={() => this.toggle()}/>
+        </svg>
         <button {..._.omit(this.props, ['icon', 'onClick'])} onClick={() => this.toggle()}>
           {this.props.icon}
         </button>

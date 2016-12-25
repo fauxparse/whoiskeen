@@ -2,27 +2,29 @@
   @include position(absolute, null null 2.75em 50%);
 
   .circle,
-  > button {
+  > button,
+  &::before {
     @include position(absolute, 0 null null 0);
+    @include size(3.5em);
+    margin: -1.75em;
   }
 
   .circle {
-    @include size(4em);
-    margin: -2em;
-    transform: scale(0);
+    transform: translate3d(0, 0, 0) scale(1);
+    transition: transform 500ms $ease-out-cubic 125ms;
 
     circle {
       fill: $accent-color;
     }
   }
 
-  &:not(.open) .circle {
-    filter: drop-shadow(0 1px .5em rgba(black, .15));
+  &.open .circle {
+    transform: translate3d(0, 0, 0) scale(200);
+    transition-timing-function: $ease-in-cubic;
+    transition-delay: 0ms;
   }
 
   > button {
-    @include size(3.5em);
-    margin: -1.75em;
     background: none;
     border-radius: 50%;
     padding: 1em;
@@ -38,6 +40,12 @@
     .icon {
       transition: transform 500ms $ease-out-back;
       transform: rotate(0deg);
+    }
+
+    &::before {
+      content: "";
+      border-radius: 50%;
+      box-shadow: 0 1px .5em rgba(black, .15);
     }
   }
 

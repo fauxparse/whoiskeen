@@ -18,9 +18,22 @@ class TeamsController < ApplicationController
   def new
   end
 
+  def create
+    respond_to do |format|
+      format.json do
+        team = Team.create(team_params)
+        render json: team
+      end
+    end
+  end
+
   private
 
   def team_id
     params[:id]
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :slug)
   end
 end

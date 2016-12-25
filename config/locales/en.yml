@@ -1,6 +1,7 @@
 en:
   dialog:
     save: Save
+    saving: Saving…
     cancel: Cancel
   teams:
     new:
