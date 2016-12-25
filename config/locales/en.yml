@@ -14,3 +14,6 @@ en:
         password: Password
       team:
         name: Team name
+        display_name: Your name
+      team/members:
+        name: Your name

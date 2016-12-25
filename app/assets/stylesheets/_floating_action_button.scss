@@ -41,12 +41,12 @@
       transition: transform 500ms $ease-out-back;
       transform: rotate(0deg);
     }
+  }
 
-    &::before {
-      content: "";
-      border-radius: 50%;
-      box-shadow: 0 1px .5em rgba(black, .15);
-    }
+  &::before {
+    content: "";
+    border-radius: 50%;
+    box-shadow: 0 1px .5em rgba(black, .15);
   }
 
   &.open > button[rel="add"] {

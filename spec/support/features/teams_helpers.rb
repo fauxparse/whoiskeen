@@ -1,12 +1,13 @@
 # rubocop:disable Metrics/AbcSize
 module Features
   module TeamHelpers
-    def add_team(name)
+    def add_team(name, display_name)
       expect(page).to have_selector('[rel="add"]')
       find(:css, '[rel="add"]').click
       within(:css, '.new-team') do
         expect(page).to have_content t('activerecord.attributes.team.name')
         fill_in t('activerecord.attributes.team.name'), with: name
+        fill_in t('activerecord.attributes.team.display_name'), with: display_name
         first(:css, '[type="submit"]').trigger('click')
       end
     end

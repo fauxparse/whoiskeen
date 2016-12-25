@@ -5,7 +5,6 @@ RSpec.describe Member, type: :model do
   let(:team) { create(:team) }
 
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:team_id) }
 
   context 'with a user' do
     subject(:member) { build(:member, team: team, user: user) }

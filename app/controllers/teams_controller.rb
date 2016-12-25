@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  wrap_parameters :team, include: TeamForm.attributes
+
   def index
     respond_to do |format|
       format.json do
@@ -20,8 +22,9 @@ class TeamsController < ApplicationController
   def create
     respond_to do |format|
       format.json do
-        team = Team.create(team_params)
-        render json: team
+        form = TeamForm.new(Team.new, current_user, team_params)
+        form.save
+        render json: form.team
       end
     end
   end
@@ -33,6 +36,7 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:name, :slug)
+    return {} unless params[:team].present?
+    params.require(:team).permit(*TeamForm.attributes)
   end
 end
