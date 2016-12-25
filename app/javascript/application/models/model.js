@@ -7,6 +7,14 @@ export default class Model {
     return `${this.constructor.name}#${this.id}`;
   }
 
+  set errors(errors) {
+    this._errors = errors
+  }
+
+  get errors() {
+    return this._errors || {}
+  }
+
   toJSON() {
     var json = {};
     if (this.id) {

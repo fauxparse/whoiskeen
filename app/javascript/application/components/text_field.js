@@ -9,18 +9,18 @@ export default class TextField extends React.Component {
   }
 
   render() {
-    const { name, value, label, type } = this.props;
+    const { name, id, value, label, type } = this.props;
 
     return (
-      <div className={this.fieldClass()}>
-        <input type={type || 'text'} name={name} value={value}
+      <div className={this.fieldClass()} data-name={name}>
+        <input type={type || 'text'} name={name} value={value} id={id || name}
           onFocus={this.handleFocus.bind(this)}
           onBlur={this.handleBlur.bind(this)}
           onChange={this.handleChange.bind(this)}
           {...this.extraProps()}
         />
-        <label htmlFor={name}>{label}</label>
-        {this.errors().map((message) => <p className="error">{message}</p>)}
+        <label htmlFor={id || name}>{label}</label>
+        {this.errors()}
       </div>
     )
   }
@@ -36,12 +36,14 @@ export default class TextField extends React.Component {
   }
 
   errors() {
-    return this.props.errors || []
+    return (this.props.errors || []).map((message, i) => (
+      <p key={i} className="error">{message}</p>
+    ))
   }
 
   extraProps() {
     return _.omit(this.props, [
-      'name', 'value', 'label', 'type', 'errors',
+      'name', 'id', 'value', 'label', 'type', 'errors',
       'onChange', 'onFocus', 'onBlur'
     ])
   }

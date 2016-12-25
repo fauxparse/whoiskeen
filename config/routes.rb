@@ -10,5 +10,11 @@ Rails.application.routes.draw do
 
   resources :teams
 
-  root to: 'teams#index'
+  constraints Clearance::Constraints::SignedIn.new do
+    root to: 'teams#index'
+  end
+
+  constraints Clearance::Constraints::SignedOut.new do
+    root to: 'public#index', as: :sign_in
+  end
 end

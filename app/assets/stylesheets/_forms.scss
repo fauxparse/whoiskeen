@@ -1,6 +1,7 @@
 .floating-label {
   position: relative;
-  height: 4em;
+  min-height: 4em;
+  padding: 1.5em 0 calc(.5em - 1px);
 
   input {
     height: calc(2em + 1px);
@@ -9,7 +10,7 @@
     border: none;
     border-bottom: $base-border;
     border-radius: 0;
-    margin: 1.5em 0 calc(.5em - 1px);
+    margin: 0;
     box-shadow: none;
 
     &:focus, &:hover {
@@ -64,12 +65,25 @@
     label { color: $error-color; }
     &::after { border-top-color: $error-color; }
   }
+
+  .error {
+    margin: .5rem 0 0;
+    font-size: $tiny-font-size;
+    color: $error-color;
+  }
+}
+
+form {
+  button[type="submit"] {
+    display: block;
+    margin-top: .5rem;
+  }
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-  -webkit-transition-delay: 9999s;
+  transition: color 9999s ease-out, background-color 9999s ease-out;
+  transition-delay: 9999s;
 }

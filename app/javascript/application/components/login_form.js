@@ -1,4 +1,6 @@
 require('lodash')
+require('velocity-animate');
+require('velocity-animate/velocity.ui');
 
 import React from 'react'
 import { connect } from 'react-redux'
@@ -7,6 +9,7 @@ import fetch from '../lib/fetch'
 import { logIn, signUp, resetPassword } from '../actions'
 import TextField from './text_field'
 import User from '../models/user'
+import Animations from '../animations'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -36,42 +39,53 @@ class LoginForm extends React.Component {
   render() {
     const { loading, mode } = this.state
 
+    const enterAnimation = {
+      animation: Animations.Login.Field.In,
+      stagger: 250,
+      duration: 500,
+      backwards: true,
+      display: 'block',
+      style: { display: 'none' }
+    }
+
+    const leaveAnimation = {
+      animation: Animations.Login.Field.Out,
+      stagger: 250,
+      duration: 250,
+      backwards: true
+    }
+
     return (
       <div className="login-form">
-        <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
-          <ul key="tabs" role="tabs">
-            <li role="tab" rel="login" aria-selected={mode === 'login'}
-              onClick={() => this.switchMode('login')}>
-              {I18n.t('users.new.sign_in')}
-            </li>
-            <li role="tab" rel="signup" aria-selected={mode === 'signup'}
-              onClick={() => this.switchMode('signup')}>
-              {I18n.t('sessions.form.sign_up')}
-            </li>
-            <li role="tab" rel="password" aria-selected={mode === 'password'}
-              onClick={() => this.switchMode('password')}>
-              {I18n.t('sessions.form.forgot_password')}
-            </li>
-          </ul>
-          <fieldset disabled={loading}>
-            <VelocityTransitionGroup component="section"
-              enter={{
-                animation: { opacity: 1, height: ['4rem', [.5, 0, .5, 1.25]] },
-                duration: 500,
-                style: { opacity: 0, height: 0 }
-              }}
-              leave={{
-                animation: { opacity: 0, height: [0, [.5, -0.25, .5, 1]] },
-                duration: 500
-              }}>
-              {this.emailField()}
-              {this.passwordField()}
-            </VelocityTransitionGroup>
-            {this.resetMessage()}
-            {this.submitButton(mode)}
-            {this.errors()}
-          </fieldset>
-        </form>
+        <div className="inner">
+          <form key="form" onSubmit={this.submit.bind(this)} data-mode={mode}>
+            <ul key="tabs" role="tabs">
+              <li role="tab" rel="login" aria-selected={mode === 'login'}
+                onClick={() => this.switchMode('login')}>
+                {I18n.t('users.new.sign_in')}
+              </li>
+              <li role="tab" rel="signup" aria-selected={mode === 'signup'}
+                onClick={() => this.switchMode('signup')}>
+                {I18n.t('sessions.form.sign_up')}
+              </li>
+              <li role="tab" rel="password" aria-selected={mode === 'password'}
+                onClick={() => this.switchMode('password')}>
+                {I18n.t('sessions.form.forgot_password')}
+              </li>
+            </ul>
+            <fieldset disabled={loading}>
+              <VelocityTransitionGroup component="section"
+                enter={enterAnimation}
+                leave={leaveAnimation}>
+                {this.emailField()}
+                {this.passwordField()}
+              </VelocityTransitionGroup>
+              {this.resetMessage()}
+              {this.submitButton(mode)}
+              {this.errors()}
+            </fieldset>
+          </form>
+        </div>
       </div>
     )
   }
@@ -91,11 +105,10 @@ class LoginForm extends React.Component {
 
     if (mode !== 'password' || !resetSent) {
       return (
-        <div key="email">
-          <TextField type="email" name="email" value={this.state.email}
-            label={I18n.t('activerecord.attributes.user.email')}
-            onChange={this.handleChange} />
-        </div>
+        <TextField key="email" type="email" name="email"
+          value={this.state.email}
+          label={I18n.t('activerecord.attributes.user.email')}
+          onChange={this.handleChange} />
       )
     }
   }
@@ -103,12 +116,10 @@ class LoginForm extends React.Component {
   passwordField() {
     if (this.state.mode !== 'password') {
       return (
-        <div key="password">
-          <TextField type="password" name="password"
-            value={this.state.password}
-            label={I18n.t('activerecord.attributes.user.password')}
-            onChange={this.handleChange} />
-        </div>
+        <TextField key="password" type="password" name="password"
+          value={this.state.password}
+          label={I18n.t('activerecord.attributes.user.password')}
+          onChange={this.handleChange} />
       )
     }
   }

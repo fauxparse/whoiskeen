@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { VelocityTransitionGroup } from 'velocity-react'
 import fetch from '../lib/fetch'
 import User from '../models/user'
 import LoginForm from './login_form'
+import Application from './application'
 import { getLoggedInUser, loggedIn } from '../actions'
+import Animations from '../animations'
 
 class Loading extends React.Component {
   render() {
-    return <div className="loading">Loading…</div>
+    return <div className="loading-screen">Loading…</div>
   }
 }
 
@@ -23,7 +26,10 @@ class Clearance extends React.Component {
   render() {
     return (
       <div className="clearance">
-        {this.contents()}
+        <Loading/>
+        <VelocityTransitionGroup {...this.animation()}>
+          {this.contents()}
+        </VelocityTransitionGroup>
       </div>
     )
   }
@@ -33,12 +39,39 @@ class Clearance extends React.Component {
 
     if (user) {
       if (user.id) {
-        return this.props.children
+        return (
+          <Application key="logged-in">
+            {this.props.children}
+          </Application>
+        )
       } else {
-        return <LoginForm user={user} />
+        return <LoginForm user={user} key="login" />
       }
-    } else {
-      return <Loading />
+    }
+  }
+
+  animation() {
+    const { user } = this.props, loggedIn = user && user.id;
+
+    const enter = {
+      animation: Animations.Login.Screen.In,
+      style: { translateY: '-110%' }
+    }
+
+    const leave = {
+      animation: Animations.Login.Screen.Out,
+      style: { translateY: 0 }
+    }
+
+    const none = {
+      animation: { translateY: 0 },
+      style: { translateY: 0 },
+      duration: 500
+    }
+
+    return {
+      enter: loggedIn ? none : enter,
+      leave: loggedIn ? leave : none
     }
   }
 }

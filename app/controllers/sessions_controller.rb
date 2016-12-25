@@ -1,6 +1,8 @@
 class SessionsController < Clearance::SessionsController
+  skip_before_action :require_login, except: [:destroy]
+
   def show
-    render json: current_user || User.new
+    render json: current_user || User.new, include: { memberships: :team }
   end
 
   def create

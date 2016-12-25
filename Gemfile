@@ -80,6 +80,7 @@ end
 
 group :test do
   gem 'capybara-webkit'
+  gem 'capybara-screenshot'
   gem 'codeclimate-test-reporter', require: nil
   gem 'database_cleaner'
   gem 'email_spec'
