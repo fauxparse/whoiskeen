@@ -8,5 +8,5 @@ class Member < ApplicationRecord
   validates :name, presence: true, length: { maximum: 128 }
   validates :user_id, uniqueness: { scope: :team_id, allow_blank: true }
 
-  alias_method :to_param, :slug
+  alias to_param slug
 end

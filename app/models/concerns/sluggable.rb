@@ -15,11 +15,11 @@ module Sluggable
 
   Stringex::ActsAsUrl::Adapter::Base.class_eval do
     def handle_duplicate_url!
-      return if !url_taken?(base_url)
+      return unless url_taken?(base_url)
 
       n = nil
       loop do
-        n = Kernel.rand(10000..99999)
+        n = Kernel.rand(10_000..99_999)
         break unless url_taken?(duplicate_for_base_url(n))
       end
 

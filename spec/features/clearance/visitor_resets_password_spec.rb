@@ -37,6 +37,7 @@ RSpec.feature 'Visitor resets password' do
   end
 
   def expect_page_to_display_change_password_message
+    expect(page).not_to have_selector(:css, '[name="email"]')
     expect(page).to have_content I18n.t('passwords.create.description')
   end
 

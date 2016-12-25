@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize
 module Features
   module ClearanceHelpers
     def reset_password_for(email)

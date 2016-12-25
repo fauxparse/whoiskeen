@@ -15,8 +15,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  def new
-  end
+  def new; end
 
   def create
     respond_to do |format|

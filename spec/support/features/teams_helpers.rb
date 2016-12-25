@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize
 module Features
   module TeamHelpers
     def add_team(name)

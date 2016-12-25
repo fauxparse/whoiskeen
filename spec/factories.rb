@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :team do
-    name "Sulaco"
+    name 'Sulaco'
   end
 
   factory :user do

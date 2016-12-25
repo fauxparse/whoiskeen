@@ -31,7 +31,7 @@ RSpec.describe Team, type: :model do
       it 'is still unique' do
         expect(Kernel)
           .to receive(:rand).with(anything)
-          .and_return(12345)
+          .and_return(12_345)
         expect(param).to eq 'boring-12345'
       end
     end
