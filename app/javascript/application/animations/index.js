@@ -65,5 +65,23 @@ export default {
         ]
       })
     }
+  },
+  FloatingActionButton: {
+    In: velocityHelpers.registerEffect({
+      calls: [
+        [{
+          scale: 1,
+          rotateZ: 0
+        }, 1, { easing: 'ease-out' }]
+      ]
+    }),
+    Out: velocityHelpers.registerEffect({
+      calls: [
+        [{
+          scale: 0,
+          rotateZ: -90
+        }, 1, { easing: 'ease-in' }]
+      ]
+    })
   }
 }

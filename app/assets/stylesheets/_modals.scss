@@ -74,9 +74,9 @@
     }
   }
 
-  .section-header ~ * & {
-    top: calc(-3.5rem - 1px);
-  }
+  // .section-header ~ * & {
+  //   top: calc(-3.5rem - 1px);
+  // }
 
   @include media(30rem) {
     justify-content: center;

@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", e => {
         <Route path="/" component={Clearance}>
           <IndexRoute component={Dashboard}/>
           <Route path="teams" component={Teams}>
-            <IndexRoute component={TeamList}/>
-            <Route path=":team_id" component={TeamContainer}/>
+            <IndexRoute components={{main: TeamList, modal: NewTeam}}/>
+            <Route path=":team_id" components={{main: TeamContainer}}/>
           </Route>
         </Route>
       </Router>

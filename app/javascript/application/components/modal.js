@@ -10,8 +10,14 @@ export default class Modal extends React.Component {
     const { open } = this.props
     return (
       <VelocityTransitionGroup
-        enter={{ animation: { translateY: [0, 'ease-out'], opacity: 1 }, duration: 500 }}
-        leave={{ animation: { translateY: ['100%', 'ease-in'], opacity: 0 }, duration: 500 }}
+        enter={{
+          animation: { translateY: [0, 'easeOutQuad'] },
+          duration: 350
+        }}
+        leave={{
+          animation: { translateY: ['100%', 'easeInQuad'] },
+          duration: 350
+        }}
         runOnMount={true}
         className={this.className()}
         onClick={this.backgroundClicked.bind(this)}>
