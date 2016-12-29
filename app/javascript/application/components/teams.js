@@ -36,7 +36,7 @@ class Teams extends React.Component {
         <SectionHeader title={this.title()} direction={direction}/>
         <PageSlider direction={direction}>
           {React.cloneElement(main, {
-            key: location.pathname,
+            key: location.pathname.split('/').slice(0, 3).join('/'),
             setTitle: (title) => this.setState({ title }),
             team
           })}

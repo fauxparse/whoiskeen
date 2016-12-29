@@ -7,6 +7,14 @@ en:
     new:
       title: Start a new team
       submit: Create team
+    inbox:
+      title: Inbox
+    events:
+      title: Events
+    people:
+      title: People
+    stats:
+      title: Stats
   activerecord:
     attributes:
       user:

@@ -6,9 +6,16 @@ Rails.application.routes.draw do
     resource :password, controller: 'passwords', only: [:create, :edit, :update]
   end
 
-  delete '/sign_out' => 'sessions#destroy', as: 'sign_out'
+  delete '/sign_out' => 'sessions#destroy', as: :sign_out
 
-  resources :teams
+  resources :teams do
+    member do
+      get '/inbox' => 'teams#show', as: :inbox
+      get '/events' => 'teams#show', as: :events
+      get '/people' => 'teams#show', as: :people
+      get '/stats' => 'teams#show', as: :stats
+    end
+  end
 
   constraints Clearance::Constraints::SignedIn.new do
     root to: 'teams#index'

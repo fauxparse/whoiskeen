@@ -39,7 +39,17 @@ class MenuButton extends React.Component {
     case 'menu':
       return showSidebar()
     case 'back':
-      return go(pathname.replace(/\/[^\/]+\/?$/, '') || '/')
+      return go(this.backUrl())
+    }
+  }
+
+  backUrl() {
+    const { pathname } = this.props
+    const parts = pathname.replace(/\/$/, '').split('/')
+    if (parts.length === 3 && parts[1] == 'teams') {
+      return '/teams'
+    } else {
+      return parts.slice(0, -2).join('/')
     }
   }
 }

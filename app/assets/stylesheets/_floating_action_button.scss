@@ -1,5 +1,5 @@
 .floating-action-button {
-  @include position(absolute, null null 2.75em 50%);
+  @include position(fixed, null null 2.25em 50%);
 
   .circle-container,
   .button > button {

@@ -83,5 +83,21 @@ export default {
         }, 1, { easing: 'ease-in' }]
       ]
     })
+  },
+  Tabs: {
+    In: velocityHelpers.registerEffect({
+      calls: [
+        [{
+          translateY: 0
+        }, 1, { easing: [0.5, 0, 0.5, 1.25] }]
+      ]
+    }),
+    Out: velocityHelpers.registerEffect({
+      calls: [
+        [{
+          translateY: '5rem'
+        }, 1, { easing: [0.5, -.25, 1, 1] }]
+      ]
+    })
   }
 }

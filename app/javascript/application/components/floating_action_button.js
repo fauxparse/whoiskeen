@@ -17,7 +17,7 @@ export default class FloatingActionButton extends React.Component {
           enter={{
             animation: Animations.FloatingActionButton.In,
             style: { scale: 0, rotateZ: -90 },
-            duration: 125, delay: 125, stagger: 125
+            duration: 125, delay: 375, stagger: 125
           }}
           leave={{
             animation: Animations.FloatingActionButton.Out,
@@ -49,7 +49,9 @@ export default class FloatingActionButton extends React.Component {
     const { modal, location, icon } = this.props
     if (modal) {
       return (
-        <button key={this.props.location.pathname} {...this.buttonProps()}
+        <button
+          key={this.props.location.pathname.split('/').slice(0, 3).join('/')}
+          {...this.buttonProps()}
           onClick={() => this.toggle()}>
           {this.props.icon}
         </button>
