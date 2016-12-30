@@ -8,6 +8,7 @@ export const FETCH_TEAMS = 'FETCH_TEAMS'
 export const FETCH_TEAM = 'FETCH_TEAM'
 export const REFRESH_TEAMS = 'REFRESH_TEAMS'
 export const REFRESH_TEAM = 'REFRESH_TEAM'
+export const REFRESH_TEAM_MEMBER = 'REFRESH_TEAM_MEMBER'
 
 export function fetchTeam(team_id) {
   return function(dispatch) {
@@ -50,4 +51,10 @@ export const refreshTeams = (teams, clear = true) => ({
 export const refreshTeam = (attrs) => ({
   type: REFRESH_TEAM,
   team: new Team(attrs)
+})
+
+export const refreshMember = (team, member) => ({
+  type: REFRESH_TEAM_MEMBER,
+  team,
+  member
 })

@@ -12,10 +12,17 @@
     border-radius: 0;
     margin: 0;
     box-shadow: none;
+    background-color: transparent;
 
     &:focus, &:hover {
       box-shadow: none;
       border-bottom: $base-border;
+    }
+
+    &:disabled {
+      border: none;
+      border-bottom: $base-border;
+      background-color: transparent;
     }
   }
 

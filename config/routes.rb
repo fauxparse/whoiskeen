@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   delete '/sign_out' => 'sessions#destroy', as: :sign_out
 
   resources :teams do
+    resources :people, controller: 'members', except: [:new, :edit]
+
     member do
       get '/inbox' => 'teams#show', as: :inbox
       get '/events' => 'teams#show', as: :events
-      get '/people' => 'teams#show', as: :people
       get '/stats' => 'teams#show', as: :stats
     end
   end

@@ -7,7 +7,6 @@ class People extends React.Component {
   render() {
     const { team, main, location } = this.props
     const members = _.sortBy(team.members, member => member.name)
-
     const pathname = _.last([location.pathname, team.url() + '/people'].sort())
 
     return (

@@ -18,6 +18,7 @@ import Events from './components/events'
 import People from './components/people'
 import MemberList from './components/member_list'
 import MemberDetails from './components/member_details'
+import NewMember from './components/new_member'
 import Stats from './components/stats'
 
 const store = createStore(
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", e => {
             <Route path=":team_id" components={{main: Team}}>
               <Route path="inbox" components={{main: Inbox, modal: NewTeam}}/>
               <Route path="events" components={{main: Events, modal: NewTeam}}/>
-              <Route path="people" components={{main: People, modal: NewTeam}}>
+              <Route path="people" components={{main: People, modal: NewMember}}>
                 <IndexRoute components={{main: MemberList}}/>
                 <Route path=":member_id" components={{main: MemberDetails}}/>
               </Route>

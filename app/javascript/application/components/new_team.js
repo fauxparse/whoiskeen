@@ -64,7 +64,7 @@ class NewTeam extends React.Component {
     e.preventDefault()
     e.stopPropagation()
 
-    if (name, displayName) {
+    if (name && displayName) {
       this.setState({ saving: true })
       fetch('/teams.json', {
         method: 'post',

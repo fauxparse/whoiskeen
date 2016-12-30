@@ -3,6 +3,10 @@ en:
     save: Save
     saving: Saving…
     cancel: Cancel
+  members:
+    new:
+      title: Add member
+      submit: Add
   teams:
     new:
       title: Start a new team
@@ -20,6 +24,8 @@ en:
       user:
         email: Email address
         password: Password
+      members:
+        name: Name
       team:
         name: Team name
         display_name: Your name

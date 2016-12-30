@@ -8,10 +8,19 @@ export default class Team extends Model {
 
   set members(data) {
     const team = this
-    this._members = data.map(attrs => new Member(_.assign({}, { team }, attrs)))
+
+    this._members = _.reduce(
+      data,
+      (hash, attrs) => _.assign(hash, { [attrs.slug]: new Member(_.assign({}, { team }, attrs)) }),
+      {}
+    )
   }
 
   get members() {
-    return this._members || []
+    return _.values(this._members || {})
+  }
+
+  refreshMember(member) {
+    this._members[member.slug] = member
   }
 }
