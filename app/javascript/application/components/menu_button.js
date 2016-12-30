@@ -46,10 +46,10 @@ class MenuButton extends React.Component {
   backUrl() {
     const { pathname } = this.props
     const parts = pathname.replace(/\/$/, '').split('/')
-    if (parts.length === 3 && parts[1] == 'teams') {
+    if (parts.length === 4 && parts[1] == 'teams') {
       return '/teams'
     } else {
-      return parts.slice(0, -2).join('/')
+      return parts.slice(0, -1).join('/')
     }
   }
 }

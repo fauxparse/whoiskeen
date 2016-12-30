@@ -5,6 +5,7 @@ class Inbox extends React.Component {
   render() {
     return (
       <section className="inbox">
+        <h1>Inbox</h1>
       </section>
     )
   }

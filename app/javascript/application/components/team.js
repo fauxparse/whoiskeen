@@ -17,19 +17,40 @@ const TeamTab = ({ team, name }) => (
 )
 
 class Team extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { tab: 'inbox', direction: PageSlider.LEFT }
+  }
+
   componentWillReceiveProps(newProps) {
-    const { team, modal } = newProps
-    if (!team.members && newProps.refresh && !newProps.loading) {
+    const { team, modal, location } = newProps
+    const tab = location.pathname.split('/')[3]
+
+    if (!team.members.length && newProps.refresh && !newProps.loading) {
       newProps.refresh(team.slug)
+    }
+
+    if (tab !== this.state.tab) {
+      let tabIndex = this.tabIndex(tab)
+      let oldTabIndex = this.tabIndex(this.state.tab)
+      if (tabIndex < oldTabIndex) {
+        this.setState({ direction: PageSlider.RIGHT, tab })
+      } else if (tabIndex > oldTabIndex) {
+        this.setState({ direction: PageSlider.LEFT, tab })
+      }
     }
   }
 
   render() {
-    const { team, loading, modal } = this.props
+    const { team, loading, main, modal, location } = this.props
 
     return (
       <section className="team">
-        <PageSlider>
+        <PageSlider direction={this.state.direction}>
+          {React.cloneElement(
+            main,
+            { key: location.pathname.split('/').slice(0, 4).join('/'), team }
+          )}
         </PageSlider>
         <VelocityTransitionGroup component="footer" role="tablist"
           enter={{
@@ -53,6 +74,10 @@ class Team extends React.Component {
     if (team) {
       return Team.TABS.map(tab => <TeamTab key={tab} name={tab} team={team}/>)
     }
+  }
+
+  tabIndex(tab) {
+    return Team.TABS.indexOf(tab)
   }
 }
 

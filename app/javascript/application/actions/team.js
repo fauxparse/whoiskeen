@@ -15,7 +15,7 @@ export function fetchTeam(team_id) {
       .then((response) => response.json())
       .then((json) => {
         const data = normalize(json, TeamSchema)
-        const members = _.values(data.entities.members)
+        const members = _.values(data.entities.memberships)
         const team = _.assign(
           {},
           data.entities.teams[data.result],
@@ -47,7 +47,7 @@ export const refreshTeams = (teams, clear = true) => ({
   clear
 })
 
-export const refreshTeam = (team) => ({
+export const refreshTeam = (attrs) => ({
   type: REFRESH_TEAM,
-  team: new Team(team)
+  team: new Team(attrs)
 })

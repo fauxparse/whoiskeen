@@ -5,6 +5,7 @@ class Events extends React.Component {
   render() {
     return (
       <section className="events">
+        <h1>Events</h1>
       </section>
     )
   }

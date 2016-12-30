@@ -1,0 +1,8 @@
+.people {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .members {
+    @include avatar-list;
+  }
+}
