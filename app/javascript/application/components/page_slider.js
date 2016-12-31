@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { VelocityTransitionGroup } from 'velocity-react'
 import Animations from '../animations'
+import classNames from '../lib/class_names'
 
 class PageSlider extends Component {
   constructor(props) {
@@ -11,8 +12,7 @@ class PageSlider extends Component {
 
   render() {
     const { component, children } = this.props;
-
-    var className = _.filter([this.props.className, 'page-slider']).join(' ')
+    var className = classNames(this.props.className, 'page-slider')
 
     return (
       <VelocityTransitionGroup component={component || "section"}
@@ -34,7 +34,7 @@ class PageSlider extends Component {
   }
 
   pageAnimation() {
-    const direction = this.props.direction || this.state.defaultDirection;
+    const direction = this.direction()
     return {
       enter: {
         animation: Animations.Page.In,
@@ -47,6 +47,10 @@ class PageSlider extends Component {
         animation: direction > 0 ? Animations.Page.Left : Animations.Page.Right
       }
     }
+  }
+
+  direction() {
+    return this.props.direction || this.state.defaultDirection;
   }
 }
 

@@ -37,6 +37,8 @@ class Team extends React.Component {
         this.setState({ direction: PageSlider.RIGHT, tab })
       } else if (tabIndex > oldTabIndex) {
         this.setState({ direction: PageSlider.LEFT, tab })
+      } else {
+        this.setState({ direction: 0 })
       }
     }
   }
@@ -49,7 +51,12 @@ class Team extends React.Component {
         <PageSlider direction={this.state.direction}>
           {React.cloneElement(
             main,
-            { key: location.pathname.split('/').slice(0, 4).join('/'), team }
+            {
+              key: location.pathname.split('/').slice(0, 4).join('/'),
+              direction: this.state.direction,
+              boop: team,
+              team
+            }
           )}
         </PageSlider>
         <VelocityTransitionGroup component="footer" role="tablist"

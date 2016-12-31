@@ -1,5 +1,3 @@
-require('lodash')
-
 import fetch from 'isomorphic-fetch';
 
 const DEFAULTS = {

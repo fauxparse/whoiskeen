@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
+import StaggeredList from './staggered_list'
 
 const Member = ({ member }) => (
   <li>
@@ -17,9 +18,9 @@ class MemberList extends React.Component {
 
     return (
       <section className="member-list">
-        <ul className="members">
+        <StaggeredList className="members">
           {members.map(member => <Member key={member.id} member={member}/>)}
-        </ul>
+        </StaggeredList>
       </section>
     )
   }

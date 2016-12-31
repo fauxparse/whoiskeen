@@ -12,7 +12,10 @@ class People extends React.Component {
     return (
       <section className="people">
         <PageSlider>
-          {React.cloneElement(main, { key: pathname.split('/').slice(0, 5).join('/'), team })}
+          {React.cloneElement(main, {
+            key: pathname.split('/').slice(0, 5).join('/'),
+            team
+          })}
         </PageSlider>
       </section>
     )
