@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'support/features/clearance_helpers'
 
 RSpec.feature 'Visitor resets password' do
   before { ActionMailer::Base.deliveries.clear }
@@ -38,7 +37,7 @@ RSpec.feature 'Visitor resets password' do
 
   def expect_page_to_display_change_password_message
     expect(page).not_to have_selector(:css, '[name="email"]')
-    expect(page).to have_content I18n.t('passwords.create.description')
+    expect(page).to have_content t('passwords.create.description')
   end
 
   def expect_mailer_to_have_delivery(recipient, subject, body)

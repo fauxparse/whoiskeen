@@ -24,7 +24,7 @@ en:
       user:
         email: Email address
         password: Password
-      members:
+      member:
         name: Name
       team:
         name: Team name

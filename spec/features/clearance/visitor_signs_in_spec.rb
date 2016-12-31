@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'support/features/clearance_helpers'
 
 RSpec.feature 'Visitor signs in' do
   scenario 'with valid email and password' do
@@ -38,6 +37,6 @@ RSpec.feature 'Visitor signs in' do
   end
 
   def expect_page_to_display_sign_in_error
-    expect(page).to have_content(I18n.t('flashes.failure_after_create'))
+    expect(page).to have_content(t('flashes.failure_after_create'))
   end
 end

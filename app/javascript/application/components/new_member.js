@@ -34,7 +34,7 @@ class NewMember extends React.Component {
           </button>
         </header>
         <fieldset disabled={saving}>
-          <TextField label={I18n.t('activerecord.attributes.members.name')}
+          <TextField label={I18n.t('activerecord.attributes.member.name')}
             name="name" value={name} autoFocus={true}
             errors={errors.name || []}
             onChange={this.changeName.bind(this)}

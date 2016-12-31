@@ -17,7 +17,7 @@ module Features
       expect(page).not_to have_selector('.login-form')
     end
 
-    def sign_in_with(email, password)
+    def sign_in_with(email, password = 'password')
       visit root_path
       expect(page).to have_selector('.login-form')
       find(:css, '[rel="login"]').click
