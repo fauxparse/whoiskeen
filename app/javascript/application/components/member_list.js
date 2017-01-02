@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import StaggeredList from './staggered_list'
+import Avatar from './avatar'
 
 const Member = ({ member }) => (
   <li>
     <Link to={member.url()}>
+      <Avatar owner={member} className={member.userId && 'verified'}/>
       <span>{member.name}</span>
     </Link>
   </li>

@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
+import Avatar from './avatar'
 
 const Row = ({ team }) => (
-  <li><Link to={team.url()}><span>{team.name}</span></Link></li>
+  <li>
+    <Link to={team.url()}>
+      <Avatar owner={team}/>
+      <span>{team.name}</span>
+    </Link>
+  </li>
 )
 
 class TeamList extends React.Component {

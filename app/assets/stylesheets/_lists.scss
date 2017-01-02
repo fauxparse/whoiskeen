@@ -14,11 +14,7 @@
     padding: .5em 1em;
     color: $base-font-color;
 
-    &::before {
-      content: "";
-      @include size(2.5em);
-      background: $light-gray;
-      border-radius: 50%;
+    .avatar {
       margin-right: 1em;
     }
 

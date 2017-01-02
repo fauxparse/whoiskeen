@@ -2,6 +2,10 @@ import Model from './model';
 import Member from './member';
 
 export default class Team extends Model {
+  toString() {
+    return this.name
+  }
+
   url() {
     return `/teams/${this.slug}`
   }
@@ -11,7 +15,9 @@ export default class Team extends Model {
 
     this._members = _.reduce(
       data,
-      (hash, attrs) => _.assign(hash, { [attrs.slug]: new Member(_.assign({}, { team }, attrs)) }),
+      (hash, attrs) => _.assign(hash, {
+        [attrs.slug]: new Member(_.assign({}, { team }, attrs))
+      }),
       {}
     )
   }
