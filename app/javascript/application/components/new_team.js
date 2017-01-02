@@ -11,11 +11,16 @@ class NewTeam extends React.Component {
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this)
-    this.state = { name: '', saving: false, errors: {} }
+    this.state = {
+      name: '',
+      displayName: props.defaultDisplayName,
+      saving: false,
+      errors: {}
+    }
   }
 
   render() {
-    const { name, saving, errors } = this.state
+    const { name, displayName, saving, errors } = this.state
     const { close } = this.props
 
     return (
@@ -25,7 +30,7 @@ class NewTeam extends React.Component {
             {Buttons.CLOSE}
           </button>
           <h2>{I18n.t('teams.new.title')}</h2>
-          <button type="submit" disabled={saving || !name} tabIndex={1}>
+          <button type="submit" disabled={saving || !name || !displayName}>
             {I18n.t(saving ? 'dialog.saving' : 'dialog.save')}
           </button>
         </header>
@@ -35,12 +40,18 @@ class NewTeam extends React.Component {
             errors={errors.name || []}
             onChange={this.changeName.bind(this)}
           />
+          <TextField
+            label={I18n.t('activerecord.attributes.team.display_name')}
+            name="display_name" value={displayName}
+            errors={errors['members.name'] || []}
+            onChange={this.changeDisplayName.bind(this)}
+          />
         </fieldset>
         <footer>
           <button type="button" rel="cancel" onClick={close} disabled={saving}>
             {I18n.t('dialog.cancel')}
           </button>
-          <button type="submit" disabled={saving || !name} tabIndex={1}>
+          <button type="submit" disabled={saving || !name || !displayName}>
             {I18n.t(saving ? 'dialog.saving' : 'teams.new.submit')}
           </button>
         </footer>
@@ -49,16 +60,16 @@ class NewTeam extends React.Component {
   }
 
   submit(e) {
-    const { name } = this.state
+    const { name, displayName } = this.state
     e.preventDefault()
     e.stopPropagation()
 
-    if (name) {
+    if (name && displayName) {
       this.setState({ saving: true })
       fetch('/teams.json', {
         method: 'post',
         body: JSON.stringify({
-          team: { name }
+          team: { name, displayName }
         })
       })
         .then((response) => response.json())
@@ -81,10 +92,18 @@ class NewTeam extends React.Component {
   changeName(e) {
     this.setState({ name: e.target.value })
   }
+
+  changeDisplayName(e) {
+    this.setState({ displayName: e.target.value })
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { }
+  const members = state.teams.entities.map((team) => team.member)
+  const latest = _.last(_.sortBy(members, 'updatedAt'))
+  return {
+    defaultDisplayName: latest ? latest.name : ''
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'support/features/clearance_helpers'
 
 RSpec.feature 'Visitor updates password' do
   xscenario 'with valid password' do
@@ -23,7 +22,7 @@ RSpec.feature 'Visitor updates password' do
     visit_password_reset_page_for user
     change_password_to ''
 
-    expect(page).to have_content I18n.t('flashes.failure_after_update')
+    expect(page).to have_content t('flashes.failure_after_update')
     expect_user_to_be_signed_out
   end
 
@@ -43,6 +42,6 @@ RSpec.feature 'Visitor updates password' do
 
   def change_password_to(password)
     fill_in 'password_reset_password', with: password
-    click_button I18n.t('helpers.submit.password_reset.submit')
+    click_button t('helpers.submit.password_reset.submit')
   end
 end

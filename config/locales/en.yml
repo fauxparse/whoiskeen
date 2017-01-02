@@ -3,14 +3,31 @@ en:
     save: Save
     saving: Saving…
     cancel: Cancel
+  members:
+    new:
+      title: Add member
+      submit: Add
   teams:
     new:
       title: Start a new team
       submit: Create team
+    inbox:
+      title: Inbox
+    events:
+      title: Events
+    people:
+      title: People
+    stats:
+      title: Stats
   activerecord:
     attributes:
       user:
         email: Email address
         password: Password
+      member:
+        name: Name
       team:
         name: Team name
+        display_name: Your name
+      team/members:
+        name: Your name

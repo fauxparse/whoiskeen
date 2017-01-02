@@ -1,0 +1,24 @@
+@mixin avatar-list {
+  list-style: none;
+  margin: 0;
+  padding: .5em 0 5.5em;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    padding: .5em 1em;
+    color: $base-font-color;
+
+    .avatar {
+      margin-right: 1em;
+    }
+
+    > span {
+    }
+  }
+}

@@ -1,7 +1,8 @@
 require('lodash')
 
-import { FETCH_TEAM, FETCH_TEAMS, REFRESH_TEAM, REFRESH_TEAMS }
-  from '../actions'
+import {
+  FETCH_TEAM, FETCH_TEAMS, REFRESH_TEAM, REFRESH_TEAMS, REFRESH_TEAM_MEMBER
+} from '../actions'
 
 const DEFAULT_STATE = {
   loading: false,
@@ -32,6 +33,9 @@ export default function teams(state = DEFAULT_STATE, action) {
   case FETCH_TEAMS:
   case FETCH_TEAM:
     return _.assign({}, state, { loading: true })
+  case REFRESH_TEAM_MEMBER:
+    action.team.refreshMember(action.member)
+    return refresh(state, [action.team])
   default:
     return state
   }
