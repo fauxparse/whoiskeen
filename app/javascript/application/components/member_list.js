@@ -7,7 +7,9 @@ import Avatar from './avatar'
 const Member = ({ member }) => (
   <li>
     <Link to={member.url()}>
-      <Avatar owner={member} className={member.userId && 'verified'}/>
+      <Avatar owner={member} className={member.email && 'verified'}>
+        {member.avatar && <img src={member.avatar}/>}
+      </Avatar>
       <span>{member.name}</span>
     </Link>
   </li>

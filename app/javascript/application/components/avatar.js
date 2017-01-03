@@ -24,6 +24,7 @@ class Avatar extends React.Component {
     const initial = this.props.owner.toString().substr(0, 1)
     return (
       <span className={this.classNames()}>
+        {this.props.children}
         <span className="initial">{initial}</span>
       </span>
     )

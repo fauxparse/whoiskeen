@@ -4,7 +4,7 @@
   @include size(2.5em);
   border-radius: 50%;
   background: $light-gray;
-  padding: .5em;
+  padding: .5em 0;
   text-align: center;
 
   .initial {
@@ -16,6 +16,16 @@
     vertical-align: middle;
   }
 
+  > * ~ .initial {
+    display: none;
+  }
+
+  img {
+    @include size(2.5em);
+    margin: -.5em 0;
+    border-radius: 50%;
+  }
+
   &.verified::after {
     content: "";
     @include position(absolute, null 0em 0em null);
@@ -25,17 +35,16 @@
     border-radius: 50%;
   }
 
-
-  &.red { background-color: $oc-red-7; }
-  &.pink { background-color: $oc-pink-7; }
-  &.grape { background-color: $oc-grape-7; }
-  &.violet { background-color: $oc-violet-7; }
-  &.indigo { background-color: $oc-indigo-7; }
-  &.blue { background-color: $oc-blue-7; }
-  &.cyan { background-color: $oc-cyan-7; }
-  &.teal { background-color: $oc-teal-7; }
-  &.green { background-color: $oc-green-7; }
-  &.lime { background-color: $oc-lime-7; }
-  &.yellow { background-color: $oc-yellow-7; }
-  &.orange { background-color: $oc-orange-7; }
+  &.red { background-color: $oc-red-5; }
+  &.pink { background-color: $oc-pink-5; }
+  &.grape { background-color: $oc-grape-5; }
+  &.violet { background-color: $oc-violet-5; }
+  &.indigo { background-color: $oc-indigo-5; }
+  &.blue { background-color: $oc-blue-5; }
+  &.cyan { background-color: $oc-cyan-5; }
+  &.teal { background-color: $oc-teal-5; }
+  &.green { background-color: $oc-green-5; }
+  &.lime { background-color: $oc-lime-5; }
+  &.yellow { background-color: $oc-yellow-5; }
+  &.orange { background-color: $oc-orange-5; }
 }

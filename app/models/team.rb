@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
   include Sluggable
 
-  has_many :members, autosave: true
+  has_many :members, -> { includes :user }, autosave: true
 end
