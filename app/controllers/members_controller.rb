@@ -1,5 +1,9 @@
 class MembersController < ApplicationController
-  def index; end
+  def index
+    respond_to do |format|
+      format.json { render json: current_team.members }
+    end
+  end
 
   def show
     respond_to do |format|
