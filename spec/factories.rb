@@ -14,6 +14,10 @@ FactoryGirl.define do
     trait :real do
       user
     end
+
+    trait :admin do
+      admin true
+    end
   end
 
   factory :team do

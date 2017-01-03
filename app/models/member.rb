@@ -6,6 +6,11 @@ class Member < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 128 }
   validates :user_id, uniqueness: { scope: :team_id, allow_blank: true }
+  validates :admin, absence: true, unless: :user?
 
   alias to_param slug
+
+  def user?
+    user_id? || user.present?
+  end
 end

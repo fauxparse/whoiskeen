@@ -15,10 +15,23 @@
     color: $base-font-color;
 
     .avatar {
+      flex: 0 0 2.5em;
       margin-right: 1em;
     }
 
     > span {
+    }
+
+    b {
+      display: block;
+      font-weight: normal;
+    }
+
+    small {
+      display: block;
+      font-size: $small-font-size;
+      line-height: ($base-font-size / $small-font-size);
+      color: $secondary-font-color;
     }
   }
 }

@@ -28,4 +28,12 @@ export default class Model {
       this[attr] = attributes[attr];
     }
   }
+
+  label(attribute) {
+    return I18n.t(`activerecord.attributes.${this.modelName()}.${attribute}`)
+  }
+
+  modelName() {
+    return _.snakeCase(this.constructor.name)
+  }
 }
