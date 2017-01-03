@@ -1,6 +1,5 @@
 class MembersController < ApplicationController
-  def index
-  end
+  def index; end
 
   def show
     respond_to do |format|
@@ -16,11 +15,9 @@ class MembersController < ApplicationController
     end
   end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
