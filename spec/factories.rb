@@ -16,6 +16,7 @@ FactoryGirl.define do
     end
 
     trait :admin do
+      real
       admin true
     end
   end
@@ -27,5 +28,15 @@ FactoryGirl.define do
   factory :user do
     email
     password 'password'
+  end
+
+  factory :invitation do
+    transient do
+      team { create(:team) }
+    end
+
+    email
+    sender { create(:member, :admin, team: team) }
+    member { create(:member, team: team) }
   end
 end

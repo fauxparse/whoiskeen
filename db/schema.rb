@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103190832) do
+ActiveRecord::Schema.define(version: 20170104210852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "sender_id"
+    t.string "email", limit: 128
+    t.string "code", limit: 64
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_invitations_on_code", using: :btree
+    t.index ["member_id"], name: "index_invitations_on_member_id", using: :btree
+    t.index ["sender_id"], name: "index_invitations_on_sender_id", using: :btree
+  end
 
   create_table "members", force: :cascade do |t|
     t.bigint "team_id"
@@ -48,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170103190832) do
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
+  add_foreign_key "invitations", "members", column: "sender_id", on_delete: :cascade
+  add_foreign_key "invitations", "members", on_delete: :cascade
   add_foreign_key "members", "teams", on_delete: :cascade
   add_foreign_key "members", "users", on_delete: :nullify
 end
