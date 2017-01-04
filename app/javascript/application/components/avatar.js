@@ -24,14 +24,26 @@ class Avatar extends React.Component {
     const initial = this.props.owner.toString().substr(0, 1)
     return (
       <span className={this.classNames()}>
-        {this.props.children}
+        {this.image()}
         <span className="initial">{initial}</span>
       </span>
     )
   }
 
+  image() {
+    const { owner } = this.props
+    if (owner.avatar) {
+      return <img src={owner.avatar} alt={owner.name}/>
+    }
+  }
+
   classNames() {
-    return classNames('avatar', this.props.className, this.color())
+    return classNames(
+      'avatar',
+      this.props.owner.avatar && 'has-image',
+      this.props.className,
+      this.color()
+    )
   }
 
   color() {

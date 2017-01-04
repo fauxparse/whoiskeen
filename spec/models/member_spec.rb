@@ -18,5 +18,17 @@ RSpec.describe Member, type: :model do
         expect(member).to have_exactly(1).error_on(:user_id)
       end
     end
+
+    it 'can be an admin' do
+      member.admin = true
+      expect(member).to be_valid
+    end
+  end
+
+  it 'cannot be an admin' do
+    member.admin = true
+    expect(member).not_to be_valid
+    expect(member).to have_exactly(1).error_on(:admin)
+    expect(member.errors_on(:admin)).to include /requires a registered user/
   end
 end

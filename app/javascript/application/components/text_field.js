@@ -1,6 +1,5 @@
-require('lodash')
-
 import React from 'react'
+import classNames from '../lib/class_names'
 
 export default class TextField extends React.Component {
   constructor(props) {
@@ -26,13 +25,14 @@ export default class TextField extends React.Component {
   }
 
   fieldClass() {
-    let classNames = _.filter((this.props.className || '').split(/\s+/))
-    classNames.push('field')
-    classNames.push('floating-label')
-    if (this.state.hasValue) classNames.push('has-value')
-    if (this.state.focus) classNames.push('has-focus')
-    if (this.errors().length) classNames.push('has-errors')
-    return _.uniq(classNames).join(' ')
+    return classNames(
+      this.props.className,
+      'field',
+      'floating-label',
+      this.state.hasValue && 'has-value',
+      this.state.focus && 'has-focus',
+      this.errors().length && 'has-errors'
+    )
   }
 
   errors() {

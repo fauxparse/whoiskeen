@@ -1,7 +1,7 @@
 require 'digest/md5'
 
 class MemberSerializer < ApplicationSerializer
-  attributes :id, :name, :slug, :email, :updated_at, :avatar
+  attributes :id, :name, :slug, :email, :updated_at, :avatar, :admin
   belongs_to :team
 
   def email

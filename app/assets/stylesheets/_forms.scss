@@ -80,6 +80,54 @@
   }
 }
 
+.checkbox {
+  label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    span {
+      margin: .75em 0;
+      flex: 1;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  svg {
+    flex: 0 0 1.5em;
+    margin: .75em 2em .75em 0;
+
+    rect {
+      stroke: $secondary-font-color;
+      stroke-width: 2px;
+      fill: none;
+    }
+
+    path {
+      fill: none;
+      stroke: white;
+      stroke-width: 2px;
+      stroke-dasharray: 18px;
+      stroke-dashoffset: 18px;
+    }
+  }
+
+  :checked ~ svg {
+    rect {
+      stroke: $action-color;
+      fill: $action-color;
+    }
+
+    path {
+      stroke-dashoffset: 0px;
+      transition: stroke-dashoffset 150ms ease-in;
+    }
+  }
+}
+
 form {
   button[type="submit"] {
     display: block;

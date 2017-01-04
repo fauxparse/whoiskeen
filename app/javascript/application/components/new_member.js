@@ -54,7 +54,7 @@ class NewMember extends React.Component {
 
   submit(e) {
     const { team } = this.props
-    const { name, displayName } = this.state
+    const { name } = this.state
     e.preventDefault()
     e.stopPropagation()
 

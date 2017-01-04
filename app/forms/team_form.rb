@@ -22,7 +22,7 @@ class TeamForm
 
   def apply(params)
     team.attributes = params.except(:display_name)
-    team.members.build(user: user, name: params[:display_name]) \
+    team.members.build(user: user, name: params[:display_name], admin: true) \
       if team.new_record?
   end
 end

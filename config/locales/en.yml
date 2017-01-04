@@ -26,8 +26,15 @@ en:
         password: Password
       member:
         name: Name
+        admin: Administrator
       team:
         name: Team name
         display_name: Your name
       team/members:
         name: Your name
+    errors:
+      models:
+        member:
+          attributes:
+            admin:
+              present: requires a registered user

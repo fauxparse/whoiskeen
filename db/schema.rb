@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219213939) do
+ActiveRecord::Schema.define(version: 20170103190832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20161219213939) do
     t.string "slug", limit: 128
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["team_id", "slug"], name: "index_members_on_team_id_and_slug", unique: true, using: :btree
     t.index ["team_id", "user_id"], name: "index_members_on_team_id_and_user_id", using: :btree
     t.index ["team_id"], name: "index_members_on_team_id", using: :btree
