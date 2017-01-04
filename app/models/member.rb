@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :team
   belongs_to :user, optional: true, inverse_of: :memberships
+  has_many :invitations
 
   acts_as_url :name, url_attribute: :slug, limit: 128, scope: :team_id
 

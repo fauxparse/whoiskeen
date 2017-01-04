@@ -38,3 +38,10 @@ en:
           attributes:
             admin:
               present: requires a registered user
+        invitation:
+          attributes:
+            sender_id:
+              not_admin: must be an Administrator
+              different_teams: must be on the same team as the member you’re trying to invite
+            member_id:
+              already_registered: is already a registered user
