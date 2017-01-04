@@ -12,7 +12,6 @@ class MembersController < ApplicationController
   end
 
   def create
-    Rails.logger.info current_team.inspect
     @member = current_team.members.create(member_params)
     respond_to do |format|
       format.json { render json: member }
@@ -30,6 +29,6 @@ class MembersController < ApplicationController
   end
 
   def member_params
-    params.require(:member).permit(:name)
+    params.require(:member).permit(:name, :admin)
   end
 end
