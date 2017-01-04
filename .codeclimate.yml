@@ -11,6 +11,10 @@ engines:
         ruby:
         javascript:
           mass_threshold: 95
+    exclude_paths:
+    - app/javascript/application/components/inbox.js
+    - app/javascript/application/components/events.js
+    - app/javascript/application/components/stats.js
   eslint:
     enabled: true
   fixme:
