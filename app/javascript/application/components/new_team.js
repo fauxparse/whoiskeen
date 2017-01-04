@@ -22,6 +22,7 @@ class NewTeam extends React.Component {
   render() {
     const { name, displayName, saving, errors } = this.state
     const { close } = this.props
+    const disabled = this.saving || !this.valid()
 
     return (
       <form className="new-team" onSubmit={this.submit}>
@@ -30,7 +31,7 @@ class NewTeam extends React.Component {
             {Buttons.CLOSE}
           </button>
           <h2>{I18n.t('teams.new.title')}</h2>
-          <button type="submit" disabled={saving || !name || !displayName}>
+          <button type="submit" disabled={disabled}>
             {I18n.t(saving ? 'dialog.saving' : 'dialog.save')}
           </button>
         </header>
@@ -51,12 +52,17 @@ class NewTeam extends React.Component {
           <button type="button" rel="cancel" onClick={close} disabled={saving}>
             {I18n.t('dialog.cancel')}
           </button>
-          <button type="submit" disabled={saving || !name || !displayName}>
+          <button type="submit" disabled={disabled}>
             {I18n.t(saving ? 'dialog.saving' : 'teams.new.submit')}
           </button>
         </footer>
       </form>
     )
+  }
+
+  valid() {
+    const { name, displayName } = this.state
+    return name.trim() && displayName.trim()
   }
 
   submit(e) {
