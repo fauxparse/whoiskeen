@@ -5,6 +5,13 @@ class Invitation < ApplicationRecord
   belongs_to :member
   has_one :team, through: :member
 
+  enum status: {
+    pending: 'pending',
+    accepted: 'accepted',
+    declined: 'declined',
+    cancelled: 'cancelled'
+  }
+
   before_validation :generate_unique_code, unless: :code?
 
   validates :sender, :member, presence: true
@@ -50,6 +57,6 @@ class Invitation < ApplicationRecord
 
   def unique_email
     errors.add(:email, :taken) \
-      if team.invitations.where(email: email).where.not(id: id).exists?
+      if team.invitations.pending.where(email: email).where.not(id: id).exists?
   end
 end

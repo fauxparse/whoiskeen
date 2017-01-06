@@ -12,7 +12,7 @@ export const REFRESH_TEAM_MEMBER = 'REFRESH_TEAM_MEMBER'
 
 export function fetchTeam(team_id) {
   return function(dispatch) {
-    fetch(`/teams/${team_id}.json`)
+    fetch(`/teams/${team_id}?_=${new Date().getTime()}`)
       .then((response) => response.json())
       .then((json) => {
         const data = normalize(json, TeamSchema)

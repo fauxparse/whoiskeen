@@ -3,6 +3,11 @@ en:
     save: Save
     saving: Saving…
     cancel: Cancel
+  invitations:
+    new:
+      send: Send
+      sending: Sending…
+      uninvite: Uninvite
   members:
     new:
       title: Add member
@@ -21,9 +26,8 @@ en:
       title: Stats
   activerecord:
     attributes:
-      user:
+      invitation:
         email: Email address
-        password: Password
       member:
         name: Name
         admin: Administrator
@@ -32,6 +36,9 @@ en:
         display_name: Your name
       team/members:
         name: Your name
+      user:
+        email: Email address
+        password: Password
     errors:
       models:
         member:

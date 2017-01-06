@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :invitations, only: [:create, :show, :destroy] do
+    member do
+      post :accept
+    end
+  end
+
   constraints Clearance::Constraints::SignedIn.new do
     root to: 'teams#index'
   end

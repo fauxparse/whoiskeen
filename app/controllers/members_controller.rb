@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   def index
     respond_to do |format|
-      format.json { render json: current_team.members }
+      format.json { render json: current_team.members, include: [:invitations] }
     end
   end
 

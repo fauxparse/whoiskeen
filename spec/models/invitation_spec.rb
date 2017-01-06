@@ -46,4 +46,14 @@ RSpec.describe Invitation, type: :model do
       expect(invitation).to have_exactly(1).error_on(:email)
     end
   end
+
+  context 'when a cancelled invitation exists with the same email' do
+    before do
+      create(:invitation, team: team, email: invitation.email).cancelled!
+    end
+
+    it 'is valid' do
+      expect(invitation).to be_valid
+    end
+  end
 end

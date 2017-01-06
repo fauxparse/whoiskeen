@@ -1,8 +1,9 @@
 require 'digest/md5'
 
 class MemberSerializer < ApplicationSerializer
-  attributes :id, :name, :slug, :email, :updated_at, :avatar, :admin
+  attributes :id, :user_id, :name, :slug, :email, :updated_at, :avatar, :admin
   belongs_to :team
+  has_many :invitations
 
   def email
     object.user.try(:email)
