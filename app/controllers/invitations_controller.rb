@@ -5,12 +5,20 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-    invitation = Invitation.find_by(code: params[:id])
     invitation.cancelled! if can_cancel?(invitation)
     render json: invitation
   end
 
+  def accept
+    AcceptInvitation.new(current_user, invitation).call
+    render json: invitation
+  end
+
   private
+
+  def invitation
+    @invitation ||= Invitation.find_by(code: params[:id])
+  end
 
   def invitation_params
     params

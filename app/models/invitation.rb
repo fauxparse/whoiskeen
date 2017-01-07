@@ -25,7 +25,7 @@ class Invitation < ApplicationRecord
 
   validate :sender_is_admin
   validate :same_team
-  validate :not_already_registered, if: :member_id?
+  validate :not_already_registered, if: [:member_id?, :pending?]
   validate :unique_email, if: [:member_id?, :email?]
 
   def to_param
