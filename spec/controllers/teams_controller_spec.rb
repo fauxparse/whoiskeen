@@ -51,7 +51,8 @@ RSpec.describe TeamsController, type: :controller do
 
   describe 'POST #create' do
     let(:post_request) do
-      post :create, params: { team: { name: 'Nostromo', display_name: 'Ripley' } }
+      post :create,
+        params: { team: { name: 'Nostromo', display_name: 'Ripley' } }
     end
 
     it 'creates a team' do
