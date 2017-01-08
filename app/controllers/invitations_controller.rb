@@ -1,4 +1,12 @@
 class InvitationsController < ApplicationController
+  def show
+    respond_to do |format|
+      format.json do
+        render json: invitation, include: %w(sender member team)
+      end
+    end
+  end
+
   def create
     invitation = Invitation.create(invitation_params)
     render json: invitation
@@ -11,6 +19,11 @@ class InvitationsController < ApplicationController
 
   def accept
     AcceptInvitation.new(current_user, invitation).call
+    render json: invitation
+  end
+
+  def decline
+    invitation.declined!
     render json: invitation
   end
 

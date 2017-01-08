@@ -27,7 +27,13 @@ module Features
       click_button I18n.t('helpers.submit.session.submit')
     end
 
+    def sign_in_as(user)
+      sign_in_with(user.email)
+      expect(page).not_to have_selector('.login-form')
+    end
+
     def sign_out
+      visit root_path
       expect(page).to have_selector(:css, '[rel="menu"]')
       find(:css, '[rel="menu"]').click
       click_button I18n.t('layouts.application.sign_out')

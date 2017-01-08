@@ -29,6 +29,7 @@ export default function teams(state = DEFAULT_STATE, action) {
   case REFRESH_TEAMS:
     return refresh(state, action.teams, !!action.clear)
   case REFRESH_TEAM:
+    if (action.member) action.team.refreshMember(action.member)
     return refresh(state, [action.team])
   case FETCH_TEAMS:
   case FETCH_TEAM:

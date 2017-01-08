@@ -71,4 +71,22 @@ RSpec.describe InvitationsController, type: :controller do
         .to(user)
     end
   end
+
+  describe 'POST #decline' do
+    let(:logged_in_user) { user }
+    let(:member) { invitation.member }
+
+    before { invitation }
+
+    it 'declines the invitation' do
+      expect { post :decline, params: { id: invitation.to_param } }
+        .not_to change(Invitation, :count)
+      expect(invitation.reload).to be_declined
+    end
+
+    it 'does not assign the user to the member' do
+      expect { post :decline, params: { id: invitation.to_param } }
+        .not_to change { invitation.member.reload.user }
+    end
+  end
 end

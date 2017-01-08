@@ -1,0 +1,66 @@
+@mixin flat-button-colors($color: $base-font-color) {
+  color: $color;
+  background-color: rgba($color, 0);
+
+  &:hover {
+    background-color: rgba($color, 0);
+  }
+
+  &:focus {
+    background-color: rgba($color, .12);
+  }
+
+  &:active {
+    background-color: rgba($color, .4);
+  }
+
+  &.flat:disabled {
+    color: rgba($color, .26);
+  }
+}
+
+@mixin raised-button-colors($background-color: $base-background-color, $color: $base-font-color) {
+  color: $color;
+  background-color: $background-color;
+
+  &:hover, &:focus {
+    background-color: darken($background-color, 12%);
+  }
+
+  &:active {
+    background-color: $background-color;
+  }
+
+  &:disabled {
+    background-color: rgba($background-color, .12);
+    color: rgba($color, .26);
+  }
+}
+
+#{$all-buttons} {
+  &.flat,
+  &.raised {
+    line-height: 1.5em;
+    vertical-align: middle;
+    padding: .375em 1em;
+    outline: none;
+    text-transform: uppercase;
+  }
+
+  &.flat {
+    @include flat-button-colors;
+  }
+
+
+  &.flat.primary {
+    @include flat-button-colors($action-color);
+  }
+
+  &.raised {
+    @include raised-button-colors;
+  }
+
+  &.raised.primary {
+    @include raised-button-colors($action-color, white);
+  }
+}

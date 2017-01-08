@@ -14,7 +14,7 @@ class Member extends React.Component {
     const invitable = admin && !member.userId
 
     return (
-      <li>
+      <li data-member-id={member.id}>
         {invitable && <InvitationForm member={member} admin={admin}/>}
         <Link to={member.url()}>
           <Avatar owner={member}

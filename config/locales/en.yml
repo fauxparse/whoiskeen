@@ -4,6 +4,10 @@ en:
     saving: Saving…
     cancel: Cancel
   invitations:
+    show:
+      invitation: "%{sender} has invited you to join %{team}."
+      accept: Accept
+      decline: No thanks
     new:
       send: Send
       sending: Sending…

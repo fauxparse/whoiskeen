@@ -48,9 +48,10 @@ export const refreshTeams = (teams, clear = true) => ({
   clear
 })
 
-export const refreshTeam = (attrs) => ({
+export const refreshTeam = (attrs, member) => ({
   type: REFRESH_TEAM,
-  team: new Team(attrs)
+  team: new Team(attrs),
+  member
 })
 
 export const refreshMember = (team, member) => ({
