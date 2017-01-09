@@ -10,3 +10,9 @@ Style/AlignParameters:
 
 Style/Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*'

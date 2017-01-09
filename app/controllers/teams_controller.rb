@@ -4,7 +4,8 @@ class TeamsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        render json: current_user.memberships.includes(:team), include: :team
+        memberships = current_user.memberships.includes(:team)
+        render json: memberships, include: :team
       end
     end
   end
@@ -12,7 +13,7 @@ class TeamsController < ApplicationController
   def show
     respond_to do |format|
       format.json do
-        render json: current_team, include: :members
+        render json: current_team, include: %w(members members.invitations)
       end
     end
   end

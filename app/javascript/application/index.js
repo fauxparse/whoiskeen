@@ -20,6 +20,7 @@ import MemberList from './components/member_list'
 import MemberDetails from './components/member_details'
 import NewMember from './components/new_member'
 import Stats from './components/stats'
+import AcceptInvitation from './components/accept_invitation'
 
 const store = createStore(
   reducer,
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded", e => {
               <IndexRedirect to="inbox"/>
             </Route>
           </Route>
+          <Route path="invitations/:code" component={AcceptInvitation}/>
         </Route>
       </Router>
     </Provider>,

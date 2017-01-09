@@ -1,4 +1,5 @@
 .people {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -6,10 +7,115 @@
 
   .member-list {
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
   }
 
   .members {
     @include avatar-list;
+    overflow: hidden;
+
+    li {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}
+
+.invitation-form {
+  @include position(absolute, 0em null 0em calc(100% - 3em));
+  z-index: 1;
+  width: calc(100% - 4.5em);
+  display: flex;
+  align-items: center;
+  transition: transform $base-duration $base-timing;
+
+  button[type] {
+    background: none;
+    margin: 0;
+    color: $secondary-font-color;
+    padding: .5em;
+    outline: none;
+
+    &:hover, &:focus, &:active {
+      background: none;
+      color: $secondary-font-color;
+    }
+  }
+
+  button[rel="toggle"] {
+    @include size(2.5em);
+    border-radius: 50%;
+    margin-right: .5em;
+  }
+
+  button[type="submit"],
+  button[rel="cancel"] {
+    text-transform: uppercase;
+    font-size: $small-font-size;
+    margin-left: .5em;
+  }
+
+  input {
+    flex: 1;
+    margin: 0;
+    border: none;
+    border-bottom: $base-border;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: none;
+
+    &:hover {
+      border: none;
+      border-bottom: $base-border;
+    }
+
+    &:focus {
+      box-shadow: none;
+      border-bottom-color: $action-color;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      background: none;
+      color: $secondary-font-color;
+      border: none;
+      border-bottom: 1px solid transparent;
+    }
+  }
+
+  div {
+    margin: 0;
+    @include ellipsis;
+    display: block;
+    flex: 1;
+  }
+
+  [rel="toggle"] ~ * {
+    opacity: 0;
+    transition: opacity $base-duration $base-timing;
+    pointer-events: none;
+  }
+
+  + a {
+    margin-right: 3.5em;
+
+    .name {
+      transition: opacity $base-duration $base-timing;
+    }
+  }
+
+  &.open {
+    transform: translateX(calc(2.5em - 100%));
+
+    [rel="toggle"] ~ * {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    + a .name {
+      opacity: 0;
+    }
   }
 }

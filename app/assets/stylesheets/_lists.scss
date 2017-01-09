@@ -23,11 +23,13 @@
     }
 
     b {
+      @include ellipsis;
       display: block;
       font-weight: normal;
     }
 
     small {
+      @include ellipsis;
       display: block;
       font-size: $small-font-size;
       line-height: ($base-font-size / $small-font-size);

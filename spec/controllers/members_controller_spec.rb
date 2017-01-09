@@ -46,7 +46,8 @@ RSpec.describe MembersController, type: :controller do
     end
 
     let(:post_request) do
-      post :create, params: { team_id: team.to_param, member: member_attributes }
+      post :create,
+        params: { team_id: team.to_param, member: member_attributes }
     end
 
     it 'creates a member' do

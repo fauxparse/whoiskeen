@@ -29,6 +29,6 @@ RSpec.describe Member, type: :model do
     member.admin = true
     expect(member).not_to be_valid
     expect(member).to have_exactly(1).error_on(:admin)
-    expect(member.errors_on(:admin)).to include /requires a registered user/
+    expect(member.errors_on(:admin)).to include(/requires a registered user/)
   end
 end
